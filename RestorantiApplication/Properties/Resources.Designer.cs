@@ -93,9 +93,29 @@ namespace RestorantiApplication.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LogoMenor {
+            get {
+                object obj = ResourceManager.GetObject("LogoMenor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LogoOficial {
             get {
                 object obj = ResourceManager.GetObject("LogoOficial", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LogoPequena {
+            get {
+                object obj = ResourceManager.GetObject("LogoPequena", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

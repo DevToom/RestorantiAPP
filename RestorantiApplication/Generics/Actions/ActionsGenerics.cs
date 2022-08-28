@@ -1,4 +1,5 @@
 ﻿using RestorantiApplication.Generics.Logs;
+using RestorantiApplication.Views.Modals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,14 @@ namespace RestorantiApplication.Generics.Actions
 
             try
             {
-                if (MessageBox.Show("Você deseja sair ?", "Sair", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    return true;
-                else
-                    return false;
+                using (var form = new Exit())
+                {
+                    form.ShowDialog();
+                    if (form.DialogResult == DialogResult.Yes)
+                        return true;
+                    else
+                        return false;
+                }
             }
             catch (Exception ex)
             {

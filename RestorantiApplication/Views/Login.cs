@@ -1,6 +1,7 @@
 ﻿using RestorantiApplication.Generics.Actions;
 using RestorantiApplication.Generics.Logs;
 using RestorantiApplication.Models;
+using RestorantiApplication.Views.Modals;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace RestorantiApplication.Views
     public partial class Login : Form
     {
         private readonly EAcessType _acessType;
+        private HttpClient _cliente;
         public Login(EAcessType acessType)
         {
             this._acessType = acessType;
@@ -38,8 +40,10 @@ namespace RestorantiApplication.Views
         {
             try
             {
+
                 if (ActionsGenerics.Exit())
                     this.Close();
+
             }
             catch (Exception ex)
             {
@@ -72,6 +76,23 @@ namespace RestorantiApplication.Views
         private void timer2_Tick(object sender, EventArgs e)
         {
             this.LblDateTimeNow.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+        }
+
+        private void BtnLogin_Click(object sender, EventArgs e)
+        {
+            _cliente = new HttpClient();
+            var result = _cliente.GetAsync("http://localhost:5202/api/UserInternal/GetUsers").Result;
+
+
+            var model = result.Content.ReadAsStringAsync();
+
+
+            //var b = a.Content;
+        }
+
+        private void BtnRegister_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

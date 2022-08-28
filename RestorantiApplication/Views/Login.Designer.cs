@@ -41,12 +41,21 @@
             this.BtnMinimize = new System.Windows.Forms.Button();
             this.BtnExit = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.TxtPassword = new System.Windows.Forms.TextBox();
+            this.TxtUser = new System.Windows.Forms.TextBox();
+            this.BtnLogin = new System.Windows.Forms.Button();
+            this.BtnRegister = new System.Windows.Forms.Button();
+            this.BtnResetPassword = new System.Windows.Forms.Button();
+            this.LblPassword = new System.Windows.Forms.Label();
+            this.lblUser = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.LblDateTimeNow = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,6 +116,7 @@
             // 
             // LblAcessType
             // 
+            this.LblAcessType.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LblAcessType.AutoSize = true;
             this.LblAcessType.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LblAcessType.Location = new System.Drawing.Point(592, 13);
@@ -216,6 +226,14 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.TxtPassword);
+            this.panel3.Controls.Add(this.TxtUser);
+            this.panel3.Controls.Add(this.BtnLogin);
+            this.panel3.Controls.Add(this.BtnRegister);
+            this.panel3.Controls.Add(this.BtnResetPassword);
+            this.panel3.Controls.Add(this.LblPassword);
+            this.panel3.Controls.Add(this.lblUser);
+            this.panel3.Controls.Add(this.pictureBox1);
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 56);
@@ -223,24 +241,112 @@
             this.panel3.Size = new System.Drawing.Size(1280, 664);
             this.panel3.TabIndex = 2;
             // 
+            // TxtPassword
+            // 
+            this.TxtPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.TxtPassword.Location = new System.Drawing.Point(437, 311);
+            this.TxtPassword.Name = "TxtPassword";
+            this.TxtPassword.Size = new System.Drawing.Size(373, 23);
+            this.TxtPassword.TabIndex = 12;
+            this.TxtPassword.UseSystemPasswordChar = true;
+            // 
+            // TxtUser
+            // 
+            this.TxtUser.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.TxtUser.Location = new System.Drawing.Point(437, 233);
+            this.TxtUser.Name = "TxtUser";
+            this.TxtUser.Size = new System.Drawing.Size(373, 23);
+            this.TxtUser.TabIndex = 11;
+            // 
+            // BtnLogin
+            // 
+            this.BtnLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnLogin.Location = new System.Drawing.Point(646, 389);
+            this.BtnLogin.Name = "BtnLogin";
+            this.BtnLogin.Size = new System.Drawing.Size(164, 39);
+            this.BtnLogin.TabIndex = 8;
+            this.BtnLogin.Text = "Entrar";
+            this.BtnLogin.UseVisualStyleBackColor = true;
+            this.BtnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
+            // 
+            // BtnRegister
+            // 
+            this.BtnRegister.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnRegister.Location = new System.Drawing.Point(437, 389);
+            this.BtnRegister.Name = "BtnRegister";
+            this.BtnRegister.Size = new System.Drawing.Size(169, 39);
+            this.BtnRegister.TabIndex = 7;
+            this.BtnRegister.Text = "Cadastrar";
+            this.BtnRegister.UseVisualStyleBackColor = true;
+            this.BtnRegister.Click += new System.EventHandler(this.BtnRegister_Click);
+            // 
+            // BtnResetPassword
+            // 
+            this.BtnResetPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnResetPassword.FlatAppearance.BorderSize = 0;
+            this.BtnResetPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnResetPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnResetPassword.Location = new System.Drawing.Point(437, 340);
+            this.BtnResetPassword.Name = "BtnResetPassword";
+            this.BtnResetPassword.Size = new System.Drawing.Size(177, 30);
+            this.BtnResetPassword.TabIndex = 6;
+            this.BtnResetPassword.Text = "Esqueci minha senha";
+            this.BtnResetPassword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnResetPassword.UseVisualStyleBackColor = true;
+            // 
+            // LblPassword
+            // 
+            this.LblPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.LblPassword.AutoSize = true;
+            this.LblPassword.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblPassword.Location = new System.Drawing.Point(437, 280);
+            this.LblPassword.Name = "LblPassword";
+            this.LblPassword.Size = new System.Drawing.Size(65, 26);
+            this.LblPassword.TabIndex = 5;
+            this.LblPassword.Text = "Senha";
+            // 
+            // lblUser
+            // 
+            this.lblUser.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblUser.AutoSize = true;
+            this.lblUser.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblUser.Location = new System.Drawing.Point(437, 204);
+            this.lblUser.Name = "lblUser";
+            this.lblUser.Size = new System.Drawing.Size(78, 26);
+            this.lblUser.TabIndex = 3;
+            this.lblUser.Text = "Usuário";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBox1.BackgroundImage = global::RestorantiApplication.Properties.Resources.LogoOficial;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(424, 25);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(386, 152);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.LblDateTimeNow);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 628);
+            this.panel4.Location = new System.Drawing.Point(0, 593);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1280, 36);
+            this.panel4.Size = new System.Drawing.Size(1280, 71);
             this.panel4.TabIndex = 0;
             // 
             // LblDateTimeNow
             // 
             this.LblDateTimeNow.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.LblDateTimeNow.AutoSize = true;
-            this.LblDateTimeNow.Location = new System.Drawing.Point(24, 12);
+            this.LblDateTimeNow.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LblDateTimeNow.Location = new System.Drawing.Point(24, 23);
             this.LblDateTimeNow.Name = "LblDateTimeNow";
-            this.LblDateTimeNow.Size = new System.Drawing.Size(31, 15);
+            this.LblDateTimeNow.Size = new System.Drawing.Size(53, 25);
             this.LblDateTimeNow.TabIndex = 0;
             this.LblDateTimeNow.Text = "Date";
+            this.LblDateTimeNow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // timer2
             // 
@@ -256,12 +362,16 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Login_Load);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.ResumeLayout(false);
@@ -285,5 +395,13 @@
         private Panel panel4;
         private System.Windows.Forms.Timer timer2;
         private Label LblDateTimeNow;
+        private Label LblPassword;
+        private Label lblUser;
+        private PictureBox pictureBox1;
+        private Button BtnResetPassword;
+        private Button BtnLogin;
+        private Button BtnRegister;
+        private TextBox TxtUser;
+        private TextBox TxtPassword;
     }
 }

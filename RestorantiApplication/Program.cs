@@ -11,6 +11,7 @@ namespace RestorantiApplication
         [STAThread]
         static void Main()
         {
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.Run(new Start());
