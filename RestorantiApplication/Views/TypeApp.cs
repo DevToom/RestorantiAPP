@@ -1,6 +1,6 @@
 ﻿using RestorantiApplication.Generics.Actions;
 using RestorantiApplication.Generics.Logs;
-using RestorantiApplication.Models;
+using RestorantiApplication.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

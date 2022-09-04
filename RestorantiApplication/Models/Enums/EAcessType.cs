@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestorantiApplication.Models
+namespace RestorantiApplication.Models.Enums
 {
     public enum EAcessType
     {
