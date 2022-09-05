@@ -108,7 +108,7 @@ namespace RestorantiApplication.Views
                     var contentString = new StringContent(request, Encoding.UTF8, "application/json");
                     contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                    HttpResponseMessage result = _client.PostAsync($"{baseUrl}/UserInternal/Login", contentString).Result; //_client.GetAsync($"{baseUrl}/UserInternal/GetUsers").Result;
+                    HttpResponseMessage result = _client.PostAsync($"{baseUrl}/UserInternal/Login", contentString).Result;
 
 
                     if (result.StatusCode == System.Net.HttpStatusCode.OK)
