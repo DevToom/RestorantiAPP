@@ -226,6 +226,7 @@
             // 
             // panel3
             // 
+            this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.Controls.Add(this.TxtPassword);
             this.panel3.Controls.Add(this.TxtUser);
             this.panel3.Controls.Add(this.BtnLogin);
@@ -261,6 +262,8 @@
             // BtnLogin
             // 
             this.BtnLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnLogin.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BtnLogin.Location = new System.Drawing.Point(646, 389);
             this.BtnLogin.Name = "BtnLogin";
             this.BtnLogin.Size = new System.Drawing.Size(164, 39);
@@ -272,6 +275,8 @@
             // BtnRegister
             // 
             this.BtnRegister.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRegister.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BtnRegister.Location = new System.Drawing.Point(437, 389);
             this.BtnRegister.Name = "BtnRegister";
             this.BtnRegister.Size = new System.Drawing.Size(169, 39);

@@ -10,7 +10,10 @@ namespace RestorantiApplication.Generics.Actions
 {
     public static class ActionsGenerics
     {
-        //Quando for sair da aplicação.
+        /// <summary>
+        /// Quando for sair da aplicação.
+        /// </summary>
+        /// <returns></returns>
         public static bool Exit()
         {
 
@@ -31,5 +34,31 @@ namespace RestorantiApplication.Generics.Actions
                 return false;
             }
         }
+
+        /// <summary>
+        /// Quando for para confirmar qualquer operação.
+        /// </summary>
+        /// <returns></returns>
+        public static bool ConfirmCustom()
+        {
+            try
+            {
+                using (var form = new ConfirmModal())
+                {
+                    form.ShowDialog();
+                    if (form.DialogResult == DialogResult.Yes)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro técnico ao encerrar ao tentar confirmar uma operação. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+                return false;
+            }
+        }
+
+
     }
 }

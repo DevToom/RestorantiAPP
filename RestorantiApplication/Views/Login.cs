@@ -1,5 +1,6 @@
 ﻿using RestorantiApplication.Generics.Actions;
 using RestorantiApplication.Generics.Logs;
+using RestorantiApplication.Models.Entities;
 using RestorantiApplication.Models.Enums;
 using RestorantiApplication.Views.Modals;
 using System;
@@ -80,19 +81,40 @@ namespace RestorantiApplication.Views
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            _cliente = new HttpClient();
-            var result = _cliente.GetAsync("http://localhost:5202/api/UserInternal/GetUsers").Result;
+            try
+            {
+                _cliente = new HttpClient();
+                var result = _cliente.GetAsync("http://localhost:5202/api/UserInternal/GetUsers").Result;
 
+                var model = result.Content.ReadAsStringAsync();
 
-            var model = result.Content.ReadAsStringAsync();
+                //var b = a.Content;
+            }
+            catch (Exception ex)
+            {
 
-
-            //var b = a.Content;
+            }
+            
         }
 
         private void BtnRegister_Click(object sender, EventArgs e)
         {
+            try
+            {
+                //Inicialização de um novo thread para a aplicação não fechar quando der um close().
+                var th = new Thread(() => Application.Run(new Register(_acessType)));
+                th.SetApartmentState(ApartmentState.STA);
+                th.Start();
+
+                //Fechar tela inicial de carregamento
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao tentar acessar a tela de cadastro de usuários. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+            }
 
         }
+
     }
 }
