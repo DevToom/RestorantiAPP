@@ -8,6 +8,16 @@ namespace RestorantiApplication.Models.Entities
 {
     public class UserInternal
     {
+        public UserInternal()
+        {
+            Name = string.Empty;
+            Phone = string.Empty;
+            Email = string.Empty;
+            Username = string.Empty;
+            Password = string.Empty;
+            ConfirmPassword = string.Empty;
+        }
+
         public int Id { get; set; }
 
         /// <summary>

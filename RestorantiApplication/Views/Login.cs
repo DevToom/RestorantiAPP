@@ -1,4 +1,5 @@
-﻿using RestorantiApplication.Generics.Actions;
+﻿using Newtonsoft.Json;
+using RestorantiApplication.Generics.Actions;
 using RestorantiApplication.Generics.Logs;
 using RestorantiApplication.Models.Entities;
 using RestorantiApplication.Models.Enums;
@@ -6,9 +7,11 @@ using RestorantiApplication.Views.Modals;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,7 +21,8 @@ namespace RestorantiApplication.Views
     public partial class Login : Form
     {
         private readonly EAcessType _acessType;
-        private HttpClient _cliente;
+        private HttpClient _client;
+        private string baseUrl;
         public Login(EAcessType acessType)
         {
             this._acessType = acessType;
@@ -83,18 +87,49 @@ namespace RestorantiApplication.Views
         {
             try
             {
-                _cliente = new HttpClient();
-                var result = _cliente.GetAsync("http://localhost:5202/api/UserInternal/GetUsers").Result;
+                //Validar se as credenciais foram digitadas...
+                if (string.IsNullOrEmpty(TxtUser.Text) || string.IsNullOrEmpty(TxtPassword.Text))
+                {
+                    MessageBox.Show("Preencha todos os campos!");
+                }
+                else
+                {
+                    //Chamar a rota API de register de usuários.
+                    _client = new HttpClient();
+                    baseUrl = ConfigurationManager.AppSettings["userInternal"].ToString();
 
-                var model = result.Content.ReadAsStringAsync();
+                    var userInternal = new UserInternal
+                    {
+                        Username = TxtUser.Text,
+                        Password = TxtPassword.Text
+                    };
 
-                //var b = a.Content;
+                    var request = JsonConvert.SerializeObject(userInternal);
+                    var contentString = new StringContent(request, Encoding.UTF8, "application/json");
+                    contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    HttpResponseMessage result = _client.PostAsync($"{baseUrl}/UserInternal/Login", contentString).Result; //_client.GetAsync($"{baseUrl}/UserInternal/GetUsers").Result;
+
+
+                    if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        //Inicialização de um novo thread para a aplicação não fechar quando der um close().
+                        var th = new Thread(() => Application.Run(new MainPage()));
+                        th.SetApartmentState(ApartmentState.STA);
+                        th.Start();
+
+                        //Fechar tela inicial de carregamento
+                        this.Close();
+                    }
+                    else
+                        MessageBox.Show(result.Content.ReadAsStringAsync().Result);
+                }
             }
             catch (Exception ex)
             {
 
             }
-            
+
         }
 
         private void BtnRegister_Click(object sender, EventArgs e)
