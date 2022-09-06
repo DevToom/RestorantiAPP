@@ -41,21 +41,6 @@ namespace RestorantiApplication.Views
             }
         }
 
-        private void BtnExit2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-                if (ActionsGenerics.Exit())
-                    this.Close();
-
-            }
-            catch (Exception ex)
-            {
-                Logger.Write($"Erro ao encerrar a aplicação. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
-            }
-        }
-
         private void Login_Load(object sender, EventArgs e)
         {
             if (_acessType == EAcessType.Cashier)
@@ -113,6 +98,10 @@ namespace RestorantiApplication.Views
 
                     if (result.StatusCode == System.Net.HttpStatusCode.OK)
                     {
+                        var userResponse = JsonConvert.DeserializeObject<UserInternal>(result.Content.ReadAsStringAsync().Result);
+                        UserLogged.Name = string.IsNullOrEmpty(userResponse.Name) ? "" : userResponse.Name;
+                        UserLogged.UserId = userResponse.Id != 0 ? userResponse.Id : 0;
+
                         //Inicialização de um novo thread para a aplicação não fechar quando der um close().
                         var th = new Thread(() => Application.Run(new MainPage()));
                         th.SetApartmentState(ApartmentState.STA);
@@ -151,5 +140,19 @@ namespace RestorantiApplication.Views
 
         }
 
+        private void BtnExit2_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (ActionsGenerics.Exit())
+                    this.Close();
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao encerrar a aplicação. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+            }
+        }
     }
 }

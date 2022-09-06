@@ -38,7 +38,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
             this.panel1.Controls.Add(this.LblSair);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -50,10 +50,11 @@
             // 
             this.LblSair.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.LblSair.AutoSize = true;
-            this.LblSair.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.LblSair.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblSair.ForeColor = System.Drawing.Color.White;
             this.LblSair.Location = new System.Drawing.Point(12, 9);
             this.LblSair.Name = "LblSair";
-            this.LblSair.Size = new System.Drawing.Size(84, 23);
+            this.LblSair.Size = new System.Drawing.Size(83, 19);
             this.LblSair.TabIndex = 1;
             this.LblSair.Text = "Confirmar";
             // 
@@ -62,7 +63,7 @@
             this.BtnNo.DialogResult = System.Windows.Forms.DialogResult.No;
             this.BtnNo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnNo.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnNo.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BtnNo.Location = new System.Drawing.Point(276, 163);
             this.BtnNo.Name = "BtnNo";
             this.BtnNo.Size = new System.Drawing.Size(137, 52);
@@ -75,7 +76,7 @@
             this.BtnYes.DialogResult = System.Windows.Forms.DialogResult.Yes;
             this.BtnYes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnYes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnYes.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnYes.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BtnYes.Location = new System.Drawing.Point(88, 163);
             this.BtnYes.Name = "BtnYes";
             this.BtnYes.Size = new System.Drawing.Size(137, 52);
@@ -86,10 +87,10 @@
             // BtnMessage
             // 
             this.BtnMessage.AutoSize = true;
-            this.BtnMessage.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnMessage.Location = new System.Drawing.Point(75, 85);
+            this.BtnMessage.Font = new System.Drawing.Font("Aleo", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnMessage.Location = new System.Drawing.Point(70, 98);
             this.BtnMessage.Name = "BtnMessage";
-            this.BtnMessage.Size = new System.Drawing.Size(350, 26);
+            this.BtnMessage.Size = new System.Drawing.Size(368, 25);
             this.BtnMessage.TabIndex = 3;
             this.BtnMessage.Text = "Você deseja confirmar essa operação?";
             // 

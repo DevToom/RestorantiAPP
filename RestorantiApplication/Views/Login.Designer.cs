@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.BtnExit2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.BtnExit2 = new System.Windows.Forms.Button();
             this.BtnBack = new System.Windows.Forms.Button();
             this.LblAcessType = new System.Windows.Forms.Label();
             this.BtnMinimize1 = new System.Windows.Forms.Button();
@@ -62,7 +62,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.BtnExit2);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.BtnMinimize);
             this.panel1.Controls.Add(this.BtnExit);
@@ -72,24 +71,10 @@
             this.panel1.Size = new System.Drawing.Size(1280, 56);
             this.panel1.TabIndex = 1;
             // 
-            // BtnExit2
-            // 
-            this.BtnExit2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.BtnExit2.BackColor = System.Drawing.Color.Transparent;
-            this.BtnExit2.FlatAppearance.BorderSize = 0;
-            this.BtnExit2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnExit2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnExit2.ForeColor = System.Drawing.Color.Black;
-            this.BtnExit2.Location = new System.Drawing.Point(1221, 12);
-            this.BtnExit2.Name = "BtnExit2";
-            this.BtnExit2.Size = new System.Drawing.Size(35, 28);
-            this.BtnExit2.TabIndex = 2;
-            this.BtnExit2.Text = "X";
-            this.BtnExit2.UseVisualStyleBackColor = false;
-            this.BtnExit2.Click += new System.EventHandler(this.BtnExit2_Click);
-            // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.panel2.Controls.Add(this.BtnExit2);
             this.panel2.Controls.Add(this.BtnBack);
             this.panel2.Controls.Add(this.LblAcessType);
             this.panel2.Controls.Add(this.BtnMinimize1);
@@ -102,26 +87,47 @@
             this.panel2.Size = new System.Drawing.Size(1280, 56);
             this.panel2.TabIndex = 3;
             // 
+            // BtnExit2
+            // 
+            this.BtnExit2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.BtnExit2.BackColor = System.Drawing.Color.Transparent;
+            this.BtnExit2.FlatAppearance.BorderSize = 0;
+            this.BtnExit2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnExit2.Font = new System.Drawing.Font("Aleo", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnExit2.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnExit2.Location = new System.Drawing.Point(1220, 12);
+            this.BtnExit2.Name = "BtnExit2";
+            this.BtnExit2.Size = new System.Drawing.Size(35, 28);
+            this.BtnExit2.TabIndex = 6;
+            this.BtnExit2.Text = "x";
+            this.BtnExit2.UseVisualStyleBackColor = true;
+            this.BtnExit2.Click += new System.EventHandler(this.BtnExit2_Click_1);
+            // 
             // BtnBack
             // 
+            this.BtnBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.BtnBack.FlatAppearance.BorderSize = 0;
+            this.BtnBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
             this.BtnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnBack.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnBack.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnBack.ForeColor = System.Drawing.Color.White;
             this.BtnBack.Location = new System.Drawing.Point(24, 12);
             this.BtnBack.Name = "BtnBack";
             this.BtnBack.Size = new System.Drawing.Size(105, 34);
             this.BtnBack.TabIndex = 5;
             this.BtnBack.Text = "Voltar";
-            this.BtnBack.UseVisualStyleBackColor = true;
+            this.BtnBack.UseVisualStyleBackColor = false;
             this.BtnBack.Click += new System.EventHandler(this.BtnBack_Click);
             // 
             // LblAcessType
             // 
             this.LblAcessType.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LblAcessType.AutoSize = true;
-            this.LblAcessType.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblAcessType.Font = new System.Drawing.Font("Aleo", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblAcessType.ForeColor = System.Drawing.Color.White;
             this.LblAcessType.Location = new System.Drawing.Point(592, 13);
             this.LblAcessType.Name = "LblAcessType";
-            this.LblAcessType.Size = new System.Drawing.Size(56, 26);
+            this.LblAcessType.Size = new System.Drawing.Size(58, 23);
             this.LblAcessType.TabIndex = 4;
             this.LblAcessType.Text = "Login";
             // 
@@ -129,7 +135,7 @@
             // 
             this.BtnMinimize1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.BtnMinimize1.BackColor = System.Drawing.Color.Transparent;
-            this.BtnMinimize1.BackgroundImage = global::RestorantiApplication.Properties.Resources.minimize6;
+            this.BtnMinimize1.BackgroundImage = global::RestorantiApplication.Properties.Resources.minimize61;
             this.BtnMinimize1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.BtnMinimize1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.BtnMinimize1.FlatAppearance.BorderSize = 0;
@@ -226,7 +232,7 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
             this.panel3.Controls.Add(this.TxtPassword);
             this.panel3.Controls.Add(this.TxtUser);
             this.panel3.Controls.Add(this.BtnLogin);
@@ -245,38 +251,48 @@
             // TxtPassword
             // 
             this.TxtPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.TxtPassword.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TxtPassword.Location = new System.Drawing.Point(437, 311);
             this.TxtPassword.Name = "TxtPassword";
-            this.TxtPassword.Size = new System.Drawing.Size(373, 23);
+            this.TxtPassword.Size = new System.Drawing.Size(373, 27);
             this.TxtPassword.TabIndex = 12;
             this.TxtPassword.UseSystemPasswordChar = true;
             // 
             // TxtUser
             // 
             this.TxtUser.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.TxtUser.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TxtUser.Location = new System.Drawing.Point(437, 233);
             this.TxtUser.Name = "TxtUser";
-            this.TxtUser.Size = new System.Drawing.Size(373, 23);
+            this.TxtUser.Size = new System.Drawing.Size(373, 27);
             this.TxtUser.TabIndex = 11;
             // 
             // BtnLogin
             // 
             this.BtnLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnLogin.BackColor = System.Drawing.Color.Transparent;
+            this.BtnLogin.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
+            this.BtnLogin.FlatAppearance.BorderSize = 0;
+            this.BtnLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
             this.BtnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnLogin.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnLogin.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnLogin.ForeColor = System.Drawing.Color.White;
             this.BtnLogin.Location = new System.Drawing.Point(646, 389);
             this.BtnLogin.Name = "BtnLogin";
             this.BtnLogin.Size = new System.Drawing.Size(164, 39);
             this.BtnLogin.TabIndex = 8;
             this.BtnLogin.Text = "Entrar";
-            this.BtnLogin.UseVisualStyleBackColor = true;
+            this.BtnLogin.UseVisualStyleBackColor = false;
             this.BtnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
             // 
             // BtnRegister
             // 
             this.BtnRegister.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.BtnRegister.FlatAppearance.BorderSize = 0;
+            this.BtnRegister.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
             this.BtnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRegister.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnRegister.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnRegister.ForeColor = System.Drawing.Color.White;
             this.BtnRegister.Location = new System.Drawing.Point(437, 389);
             this.BtnRegister.Name = "BtnRegister";
             this.BtnRegister.Size = new System.Drawing.Size(169, 39);
@@ -290,7 +306,8 @@
             this.BtnResetPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.BtnResetPassword.FlatAppearance.BorderSize = 0;
             this.BtnResetPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnResetPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnResetPassword.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnResetPassword.ForeColor = System.Drawing.Color.White;
             this.BtnResetPassword.Location = new System.Drawing.Point(437, 340);
             this.BtnResetPassword.Name = "BtnResetPassword";
             this.BtnResetPassword.Size = new System.Drawing.Size(177, 30);
@@ -303,10 +320,11 @@
             // 
             this.LblPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LblPassword.AutoSize = true;
-            this.LblPassword.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblPassword.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblPassword.ForeColor = System.Drawing.Color.White;
             this.LblPassword.Location = new System.Drawing.Point(437, 280);
             this.LblPassword.Name = "LblPassword";
-            this.LblPassword.Size = new System.Drawing.Size(65, 26);
+            this.LblPassword.Size = new System.Drawing.Size(53, 19);
             this.LblPassword.TabIndex = 5;
             this.LblPassword.Text = "Senha";
             // 
@@ -314,17 +332,18 @@
             // 
             this.lblUser.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblUser.AutoSize = true;
-            this.lblUser.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblUser.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblUser.ForeColor = System.Drawing.Color.White;
             this.lblUser.Location = new System.Drawing.Point(437, 204);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(78, 26);
+            this.lblUser.Size = new System.Drawing.Size(66, 19);
             this.lblUser.TabIndex = 3;
             this.lblUser.Text = "Usuário";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox1.BackgroundImage = global::RestorantiApplication.Properties.Resources.LogoOficial;
+            this.pictureBox1.BackgroundImage = global::RestorantiApplication.Properties.Resources.Logo300x2001;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Location = new System.Drawing.Point(424, 25);
             this.pictureBox1.Name = "pictureBox1";
@@ -345,10 +364,11 @@
             // 
             this.LblDateTimeNow.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.LblDateTimeNow.AutoSize = true;
-            this.LblDateTimeNow.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LblDateTimeNow.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblDateTimeNow.ForeColor = System.Drawing.Color.White;
             this.LblDateTimeNow.Location = new System.Drawing.Point(24, 23);
             this.LblDateTimeNow.Name = "LblDateTimeNow";
-            this.LblDateTimeNow.Size = new System.Drawing.Size(53, 25);
+            this.LblDateTimeNow.Size = new System.Drawing.Size(43, 19);
             this.LblDateTimeNow.TabIndex = 0;
             this.LblDateTimeNow.Text = "Date";
             this.LblDateTimeNow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -388,7 +408,6 @@
         private Panel panel1;
         private Button BtnMinimize;
         private Button BtnExit;
-        private Button BtnExit2;
         private Panel panel2;
         private Label label1;
         private Button BtnKitchen;
@@ -408,5 +427,6 @@
         private Button BtnRegister;
         private TextBox TxtUser;
         private TextBox TxtPassword;
+        private Button BtnExit2;
     }
 }

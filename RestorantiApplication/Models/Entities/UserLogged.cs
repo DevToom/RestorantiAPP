@@ -10,6 +10,5 @@ namespace RestorantiApplication.Models.Entities
     {
         public static int UserId { get; set; } = 0;
         public static string Name { get; set; }
-
     }
 }

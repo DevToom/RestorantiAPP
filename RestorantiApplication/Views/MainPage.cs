@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestorantiApplication.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,11 @@ namespace RestorantiApplication.Views
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void MainPage_Load(object sender, EventArgs e)
+        {
+            LblUserLogged.Text = $"Olá, {UserLogged.Name}";
         }
     }
 }

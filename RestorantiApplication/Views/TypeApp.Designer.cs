@@ -41,7 +41,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
             this.panel1.Controls.Add(this.BtnMinimize);
             this.panel1.Controls.Add(this.BtnExit);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -54,16 +54,16 @@
             // 
             this.BtnMinimize.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.BtnMinimize.BackColor = System.Drawing.Color.Transparent;
-            this.BtnMinimize.BackgroundImage = global::RestorantiApplication.Properties.Resources.minimize6;
+            this.BtnMinimize.BackgroundImage = global::RestorantiApplication.Properties.Resources.minimize61;
             this.BtnMinimize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.BtnMinimize.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.BtnMinimize.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.BtnMinimize.FlatAppearance.BorderSize = 0;
             this.BtnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.BtnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.BtnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnMinimize.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BtnMinimize.Font = new System.Drawing.Font("Aleo", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BtnMinimize.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnMinimize.Location = new System.Drawing.Point(1176, 18);
+            this.BtnMinimize.Location = new System.Drawing.Point(1167, 18);
             this.BtnMinimize.Name = "BtnMinimize";
             this.BtnMinimize.Size = new System.Drawing.Size(27, 22);
             this.BtnMinimize.TabIndex = 1;
@@ -77,18 +77,19 @@
             this.BtnExit.BackColor = System.Drawing.Color.Transparent;
             this.BtnExit.FlatAppearance.BorderSize = 0;
             this.BtnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnExit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnExit.ForeColor = System.Drawing.Color.Black;
-            this.BtnExit.Location = new System.Drawing.Point(1221, 12);
+            this.BtnExit.Font = new System.Drawing.Font("Aleo", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnExit.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnExit.Location = new System.Drawing.Point(1220, 12);
             this.BtnExit.Name = "BtnExit";
             this.BtnExit.Size = new System.Drawing.Size(35, 28);
             this.BtnExit.TabIndex = 0;
-            this.BtnExit.Text = "X";
-            this.BtnExit.UseVisualStyleBackColor = false;
+            this.BtnExit.Text = "x";
+            this.BtnExit.UseVisualStyleBackColor = true;
             this.BtnExit.Click += new System.EventHandler(this.BtnExit_Click);
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.BtnKitchen);
             this.panel2.Controls.Add(this.BtnCashier);
@@ -102,21 +103,25 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(401, 81);
+            this.label1.Font = new System.Drawing.Font("Aleo", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(443, 143);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(437, 33);
+            this.label1.Size = new System.Drawing.Size(360, 25);
             this.label1.TabIndex = 2;
             this.label1.Text = "ESCOLHA O AMBIENTE DE ACESSO";
             // 
             // BtnKitchen
             // 
             this.BtnKitchen.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.BtnKitchen.BackgroundImage = global::RestorantiApplication.Properties.Resources.Cozinha;
+            this.BtnKitchen.BackgroundImage = global::RestorantiApplication.Properties.Resources.Cozinha1;
             this.BtnKitchen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BtnKitchen.FlatAppearance.BorderSize = 0;
+            this.BtnKitchen.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
             this.BtnKitchen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnKitchen.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.BtnKitchen.Location = new System.Drawing.Point(707, 196);
+            this.BtnKitchen.Font = new System.Drawing.Font("Aleo", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnKitchen.ForeColor = System.Drawing.Color.White;
+            this.BtnKitchen.Location = new System.Drawing.Point(659, 196);
             this.BtnKitchen.Name = "BtnKitchen";
             this.BtnKitchen.Size = new System.Drawing.Size(303, 216);
             this.BtnKitchen.TabIndex = 1;
@@ -129,11 +134,14 @@
             // BtnCashier
             // 
             this.BtnCashier.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.BtnCashier.BackgroundImage = global::RestorantiApplication.Properties.Resources.Caixa;
+            this.BtnCashier.BackgroundImage = global::RestorantiApplication.Properties.Resources.Caixa1;
             this.BtnCashier.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BtnCashier.FlatAppearance.BorderSize = 0;
+            this.BtnCashier.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
             this.BtnCashier.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCashier.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.BtnCashier.Location = new System.Drawing.Point(215, 196);
+            this.BtnCashier.Font = new System.Drawing.Font("Aleo", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnCashier.ForeColor = System.Drawing.Color.White;
+            this.BtnCashier.Location = new System.Drawing.Point(273, 196);
             this.BtnCashier.Name = "BtnCashier";
             this.BtnCashier.Size = new System.Drawing.Size(296, 216);
             this.BtnCashier.TabIndex = 0;

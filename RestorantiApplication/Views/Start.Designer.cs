@@ -39,8 +39,8 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBox1.BackgroundImage = global::RestorantiApplication.Properties.Resources.LogoOficial;
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
+            this.pictureBox1.BackgroundImage = global::RestorantiApplication.Properties.Resources.Logo300x200;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
@@ -64,10 +64,12 @@
             // 
             this.lblWait.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblWait.AutoSize = true;
-            this.lblWait.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblWait.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
+            this.lblWait.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblWait.ForeColor = System.Drawing.Color.White;
             this.lblWait.Location = new System.Drawing.Point(487, 404);
             this.lblWait.Name = "lblWait";
-            this.lblWait.Size = new System.Drawing.Size(68, 18);
+            this.lblWait.Size = new System.Drawing.Size(80, 19);
             this.lblWait.TabIndex = 2;
             this.lblWait.Text = "Aguarde...";
             // 
