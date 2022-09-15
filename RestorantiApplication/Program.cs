@@ -15,6 +15,7 @@ namespace RestorantiApplication
             Application.SetCompatibleTextRenderingDefault(false);
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.Run(new Start());
+            //Application.Run(new Kitchen());
         }
     }
 }
