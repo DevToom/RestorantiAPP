@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RestorantiApplication.Generics.Actions;
+using RestorantiApplication.Generics.Logs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,58 +21,113 @@ namespace RestorantiApplication.Views
 
         private void Kitchen_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 10; i++)
             {
-                
+
                 Label lblTitleOrder = AddTitleOrder(i);
                 Label lblDescOrder = AddDescOrder(i);
                 Button btnDetails = AddBtnDetails(i);
                 Button btnPrepare = AddBtnPrepare(i);
                 GroupBox gpBox = AddGroupBox(i);
 
-                flowLayoutPanel1.Controls.Add(gpBox);
+                flowPrepare.Controls.Add(gpBox);
                 gpBox.Controls.Add(lblTitleOrder);
                 gpBox.Controls.Add(lblDescOrder);
                 gpBox.Controls.Add(btnDetails);
                 gpBox.Controls.Add(btnPrepare);
-                btnPrepare.Click += new System.EventHandler(this.Button_Click);
+                btnPrepare.Click += new System.EventHandler(this.ButtonPreparing_Click);
 
             }
         }
 
-        private void Button_Click(object? sender, EventArgs e)
+        /// <summary>
+        /// Ao clicar no botão de preparar um pedido
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonPreparing_Click(object? sender, EventArgs e)
         {
             GroupBox groupBox = new GroupBox();
             Button InfoButton = (Button)sender;
-
+            bool hasPreparing = false;
             //Mandar para grid de preparo
-            foreach (Control control in flowLayoutPanel1.Controls)
+            foreach (Control control in flowPrepare.Controls)
             {
                 if (control is GroupBox)
                 {
-                    if (control.Name.Substring(control.Name.IndexOf("_")+1) == InfoButton.Name.Substring(InfoButton.Name.IndexOf("_")+1))
+                    if (control.Name.Substring(control.Name.IndexOf("_") + 1) == InfoButton.Name.Substring(InfoButton.Name.IndexOf("_") + 1))
                     {
-                        groupBox = (GroupBox)control;
+                        foreach (Button btn in control.Controls.OfType<Button>())
+                        {
+                            if (btn.Name.Contains("_"))
+                            {
+                                btn.Text = "Finalizar";
+                                btn.Click += new System.EventHandler(this.ButtonPrepared_Click);
+                                groupBox = (GroupBox)control;
+                                hasPreparing = true;
+                                break;
+                            }
+                        }
                         break;
                     }
                 }
             }
 
-            flowLayoutPanel2.Controls.Add(groupBox);
-            MessageBox.Show("Status do pedido alterado.");
+            if (hasPreparing)
+                flowPreparing.Controls.Add(groupBox);
+
+        }
+
+        /// <summary>
+        /// Ao clicar no botão de finalizar pedido.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void ButtonPrepared_Click(object? sender, EventArgs e)
+        {
+            GroupBox groupBox = new GroupBox();
+            Button InfoButton = (Button)sender;
+            bool hasPrepared = false;
+            foreach (Control control in flowPreparing.Controls)
+            {
+                if (control is GroupBox)
+                {
+                    if (control.Name.Substring(control.Name.IndexOf("_") + 1) == InfoButton.Name.Substring(InfoButton.Name.IndexOf("_") + 1))
+                    {
+                        foreach (Button btn in control.Controls.OfType<Button>())
+                        {
+                            if (btn.Name.Contains("_"))
+                            {
+                                btn.Text = "Preparado";
+                                btn.Visible = false;
+                                //btn.Click += new System.EventHandler(this.ButtonPrepared_Click);
+                                groupBox = (GroupBox)control;
+                                hasPrepared = true;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
+            if (hasPrepared)
+                flowPrepared.Controls.Add(groupBox);
         }
 
         private Label AddTitleOrder(int count)
         {
             Label lbl = new Label();
             lbl.Name = $"lbl1{count}";
-            lbl.Text = $"Pedido nº{count}";
+            lbl.Text = $"Nº {count}";
+            lbl.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             lbl.ForeColor = Color.White;
-            lbl.BackColor = Color.Blue;
+            lbl.BackColor = Color.FromArgb(11, 7, 17);
             lbl.TextAlign = ContentAlignment.MiddleCenter;
             lbl.Margin = new Padding(5);
 
-            return lbl; 
+            return lbl;
         }
 
         private Label AddDescOrder(int count)
@@ -78,8 +135,8 @@ namespace RestorantiApplication.Views
             Label lbl = new Label();
             lbl.Name = $"lbl2{count}";
             lbl.Text = $@"1X X-Salada {Environment.NewLine}1x Refrigerante Coca-Cola";
-            lbl.ForeColor = Color.White;
-            lbl.BackColor = Color.Green;
+            lbl.ForeColor = Color.Black;
+            lbl.BackColor = Color.White;
             lbl.Dock = DockStyle.Fill;
             lbl.TextAlign = ContentAlignment.MiddleLeft;
             lbl.Margin = new Padding(5);
@@ -96,6 +153,14 @@ namespace RestorantiApplication.Views
             btn.Text = "Detalhes";
             btn.Dock = DockStyle.Bottom;
             btn.ForeColor = Color.Black;
+
+            btn.FlatStyle = FlatStyle.Flat;
+            //btn.FlatAppearance.BorderColor = Color.FromArgb(11, 7, 17);
+            btn.FlatAppearance.BorderSize = 0;
+            btn.BackColor = Color.Orange;
+            btn.FlatAppearance.MouseOverBackColor = Color.DarkOrange;
+            btn.FlatAppearance.MouseDownBackColor = Color.DarkOrange;
+
             btn.Size = new Size(232, 30);
             btn.UseVisualStyleBackColor = true;
             btn.TextAlign = ContentAlignment.MiddleCenter;
@@ -110,7 +175,13 @@ namespace RestorantiApplication.Views
             btn.Name = $"btn_{count}";
             btn.Text = "Preparar";
             btn.Dock = DockStyle.Bottom;
-            btn.ForeColor = Color.Black;
+            btn.ForeColor = Color.White;
+            btn.FlatStyle = FlatStyle.Flat;
+            //btn.FlatAppearance.BorderColor = Color.FromArgb(11, 7, 17);
+            btn.FlatAppearance.BorderSize = 0;
+            btn.BackColor = Color.FromArgb(11, 7, 17);
+            btn.FlatAppearance.MouseOverBackColor = Color.Green;
+            btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(32,30,45);
             btn.Size = new Size(232, 30);
             btn.UseVisualStyleBackColor = true;
             btn.TextAlign = ContentAlignment.MiddleCenter;
@@ -124,7 +195,7 @@ namespace RestorantiApplication.Views
             GroupBox gpBox = new GroupBox();
             gpBox.Location = new System.Drawing.Point(3, 3);
             gpBox.Name = $"gb_{count}";
-            gpBox.Size = new System.Drawing.Size(231, 231);
+            gpBox.Size = new System.Drawing.Size(365, 150);
             gpBox.TabIndex = 0;
             gpBox.TabStop = false;
             gpBox.Text = "GroupBoxAdd";
@@ -132,5 +203,17 @@ namespace RestorantiApplication.Views
             return gpBox;
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ActionsGenerics.Exit())
+                    this.Close();
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao encerrar a aplicação. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+            }
+        }
     }
 }
