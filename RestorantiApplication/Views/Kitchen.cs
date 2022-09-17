@@ -1,8 +1,11 @@
-﻿using RestorantiApplication.Generics.Actions;
+﻿using Newtonsoft.Json;
+using RestorantiApplication.Generics.Actions;
 using RestorantiApplication.Generics.Logs;
+using RestorantiApplication.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -12,32 +15,67 @@ using System.Windows.Forms;
 
 namespace RestorantiApplication.Views
 {
+    
     public partial class Kitchen : Form
     {
+        private HttpClient _client = new HttpClient();
+        private readonly static string baseUrl = ConfigurationManager.AppSettings["order"].ToString();
         public Kitchen()
         {
             InitializeComponent();
         }
 
-        private void Kitchen_Load(object sender, EventArgs e)
+        private async void Kitchen_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < 10; i++)
+            try
+            {
+                HttpResponseMessage result = _client.GetAsync($"{baseUrl}/Order/GetListOrder").Result;//_client.PostAsync($"{baseUrl}/UserInternal/Login", contentString).Result;
+
+                if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var orders = JsonConvert.DeserializeObject<List<Order>>(await result.Content.ReadAsStringAsync());
+                    foreach (var i in orders)
+                    {
+                        Label lblTitleOrder = AddTitleOrder(i);
+                        Label lblDescOrder = AddDescOrder(i);
+                        Button btnDetails = AddBtnObservation(i);
+                        Button btnPrepare = AddBtnPrepare(i);
+                        GroupBox gpBox = AddGroupBox(i);
+
+                        flowPrepare.Controls.Add(gpBox);
+                        gpBox.Controls.Add(lblTitleOrder);
+                        gpBox.Controls.Add(lblDescOrder);
+                        gpBox.Controls.Add(btnDetails);
+                        gpBox.Controls.Add(btnPrepare);
+                        btnPrepare.Click += new System.EventHandler(this.ButtonPreparing_Click);
+                    }
+
+                }
+
+                //    for (int i = 0; i < 10; i++)
+                //{
+
+                //    Label lblTitleOrder = AddTitleOrder(i);
+                //    Label lblDescOrder = AddDescOrder(i);
+                //    Button btnDetails = AddBtnObservation(i);
+                //    Button btnPrepare = AddBtnPrepare(i);
+                //    GroupBox gpBox = AddGroupBox(i);
+
+                //    flowPrepare.Controls.Add(gpBox);
+                //    gpBox.Controls.Add(lblTitleOrder);
+                //    gpBox.Controls.Add(lblDescOrder);
+                //    gpBox.Controls.Add(btnDetails);
+                //    gpBox.Controls.Add(btnPrepare);
+                //    btnPrepare.Click += new System.EventHandler(this.ButtonPreparing_Click);
+
+                //}
+            }
+            catch (Exception)
             {
 
-                Label lblTitleOrder = AddTitleOrder(i);
-                Label lblDescOrder = AddDescOrder(i);
-                Button btnDetails = AddBtnDetails(i);
-                Button btnPrepare = AddBtnPrepare(i);
-                GroupBox gpBox = AddGroupBox(i);
-
-                flowPrepare.Controls.Add(gpBox);
-                gpBox.Controls.Add(lblTitleOrder);
-                gpBox.Controls.Add(lblDescOrder);
-                gpBox.Controls.Add(btnDetails);
-                gpBox.Controls.Add(btnPrepare);
-                btnPrepare.Click += new System.EventHandler(this.ButtonPreparing_Click);
-
+                throw;
             }
+            
         }
 
         /// <summary>
@@ -116,11 +154,11 @@ namespace RestorantiApplication.Views
                 flowPrepared.Controls.Add(groupBox);
         }
 
-        private Label AddTitleOrder(int count)
+        private Label AddTitleOrder(Order order)
         {
             Label lbl = new Label();
-            lbl.Name = $"lbl1{count}";
-            lbl.Text = $"Nº {count}";
+            lbl.Name = $"lbl1_{order.OrderId}";
+            lbl.Text = $"Nº {order.OrderId}";
             lbl.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             lbl.ForeColor = Color.White;
             lbl.BackColor = Color.FromArgb(11, 7, 17);
@@ -130,11 +168,18 @@ namespace RestorantiApplication.Views
             return lbl;
         }
 
-        private Label AddDescOrder(int count)
+        private Label AddDescOrder(Order order)
         {
+
+            string OrderMessage = string.Empty;
+
+            order.Itens.ForEach(i =>
+                OrderMessage += @$"{i.Quantity}x {i.Name} {Environment.NewLine}"
+            );
+
             Label lbl = new Label();
-            lbl.Name = $"lbl2{count}";
-            lbl.Text = $@"1X X-Salada {Environment.NewLine}1x Refrigerante Coca-Cola";
+            lbl.Name = $"lbl2_{order.OrderId}";
+            lbl.Text = OrderMessage;
             lbl.ForeColor = Color.Black;
             lbl.BackColor = Color.White;
             lbl.Dock = DockStyle.Fill;
@@ -146,16 +191,15 @@ namespace RestorantiApplication.Views
             return lbl;
         }
 
-        private Button AddBtnDetails(int count)
+        private Button AddBtnObservation(Order order)
         {
             Button btn = new Button();
-            btn.Name = $"btn1{count}";
-            btn.Text = "Detalhes";
+            btn.Name = $"btn1_{order.OrderId}";
+            btn.Text = "Observação";
             btn.Dock = DockStyle.Bottom;
             btn.ForeColor = Color.Black;
 
             btn.FlatStyle = FlatStyle.Flat;
-            //btn.FlatAppearance.BorderColor = Color.FromArgb(11, 7, 17);
             btn.FlatAppearance.BorderSize = 0;
             btn.BackColor = Color.Orange;
             btn.FlatAppearance.MouseOverBackColor = Color.DarkOrange;
@@ -165,14 +209,20 @@ namespace RestorantiApplication.Views
             btn.UseVisualStyleBackColor = true;
             btn.TextAlign = ContentAlignment.MiddleCenter;
             btn.Margin = new Padding(5);
+            btn.Click += new System.EventHandler(this.ButtonObservation_Click);
 
             return btn;
         }
 
-        private Button AddBtnPrepare(int count)
+        private void ButtonObservation_Click(object? sender, EventArgs e)
+        {
+            //Mostrar a modal com a informação.
+        }
+
+        private Button AddBtnPrepare(Order order)
         {
             Button btn = new Button();
-            btn.Name = $"btn_{count}";
+            btn.Name = $"btn2_{order.OrderId}";
             btn.Text = "Preparar";
             btn.Dock = DockStyle.Bottom;
             btn.ForeColor = Color.White;
@@ -190,11 +240,11 @@ namespace RestorantiApplication.Views
             return btn;
         }
 
-        private GroupBox AddGroupBox(int count)
+        private GroupBox AddGroupBox(Order order)
         {
             GroupBox gpBox = new GroupBox();
             gpBox.Location = new System.Drawing.Point(3, 3);
-            gpBox.Name = $"gb_{count}";
+            gpBox.Name = $"gb_{order.OrderId}";
             gpBox.Size = new System.Drawing.Size(365, 150);
             gpBox.TabIndex = 0;
             gpBox.TabStop = false;

@@ -22,7 +22,7 @@ namespace RestorantiApplication.Views
     {
         private readonly EAcessType _acessType;
         private HttpClient _client;
-        private string baseUrl;
+        private readonly static string baseUrl = ConfigurationManager.AppSettings["userInternal"].ToString();
         public Login(EAcessType acessType)
         {
             this._acessType = acessType;
@@ -81,7 +81,7 @@ namespace RestorantiApplication.Views
                 {
                     //Chamar a rota API de register de usuários.
                     _client = new HttpClient();
-                    baseUrl = ConfigurationManager.AppSettings["userInternal"].ToString();
+                    
 
                     var userInternal = new UserInternal
                     {
