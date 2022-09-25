@@ -129,7 +129,6 @@ namespace RestorantiApplication.Views
                 var th = new Thread(() => Application.Run(new Register(_acessType)));
                 th.SetApartmentState(ApartmentState.STA);
                 th.Start();
-
                 //Fechar tela inicial de carregamento
                 this.Close();
             }
@@ -152,6 +151,19 @@ namespace RestorantiApplication.Views
             catch (Exception ex)
             {
                 Logger.Write($"Erro ao encerrar a aplicação. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+            }
+        }
+
+        private void BtnResetPassword_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var form = new RecoveryPasswordStep1();
+                form.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao tentar acessar a tela de recuperação de senha. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
             }
         }
     }

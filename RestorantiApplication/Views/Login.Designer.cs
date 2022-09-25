@@ -251,6 +251,7 @@
             // TxtPassword
             // 
             this.TxtPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.TxtPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TxtPassword.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TxtPassword.Location = new System.Drawing.Point(437, 311);
             this.TxtPassword.Name = "TxtPassword";
@@ -261,6 +262,7 @@
             // TxtUser
             // 
             this.TxtUser.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.TxtUser.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.TxtUser.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TxtUser.Location = new System.Drawing.Point(437, 233);
             this.TxtUser.Name = "TxtUser";
@@ -315,6 +317,7 @@
             this.BtnResetPassword.Text = "Esqueci minha senha";
             this.BtnResetPassword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BtnResetPassword.UseVisualStyleBackColor = true;
+            this.BtnResetPassword.Click += new System.EventHandler(this.BtnResetPassword_Click);
             // 
             // LblPassword
             // 

@@ -49,26 +49,7 @@ namespace RestorantiApplication.Views
                         gpBox.Controls.Add(btnPrepare);
                         btnPrepare.Click += new System.EventHandler(this.ButtonPreparing_Click);
                     }
-
                 }
-
-                //    for (int i = 0; i < 10; i++)
-                //{
-
-                //    Label lblTitleOrder = AddTitleOrder(i);
-                //    Label lblDescOrder = AddDescOrder(i);
-                //    Button btnDetails = AddBtnObservation(i);
-                //    Button btnPrepare = AddBtnPrepare(i);
-                //    GroupBox gpBox = AddGroupBox(i);
-
-                //    flowPrepare.Controls.Add(gpBox);
-                //    gpBox.Controls.Add(lblTitleOrder);
-                //    gpBox.Controls.Add(lblDescOrder);
-                //    gpBox.Controls.Add(btnDetails);
-                //    gpBox.Controls.Add(btnPrepare);
-                //    btnPrepare.Click += new System.EventHandler(this.ButtonPreparing_Click);
-
-                //}
             }
             catch (Exception)
             {
