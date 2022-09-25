@@ -28,18 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.PanelRender = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.LblUserLogged = new System.Windows.Forms.Label();
             this.BtnExit = new System.Windows.Forms.Button();
             this.BtnMinimize1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.BtnProducts = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.BtnLogout = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.BtnCategorys = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BtnUsers = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -56,6 +59,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            this.panel1.Controls.Add(this.PanelRender);
             this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -63,6 +67,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1280, 720);
             this.panel1.TabIndex = 0;
+            // 
+            // PanelRender
+            // 
+            this.PanelRender.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelRender.Location = new System.Drawing.Point(204, 56);
+            this.PanelRender.Name = "PanelRender";
+            this.PanelRender.Size = new System.Drawing.Size(1076, 664);
+            this.PanelRender.TabIndex = 2;
+            this.PanelRender.Leave += new System.EventHandler(this.PanelRender_Leave);
             // 
             // panel6
             // 
@@ -125,6 +138,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.panel2.Controls.Add(this.BtnProducts);
             this.panel2.Controls.Add(this.panel7);
             this.panel2.Controls.Add(this.panel5);
             this.panel2.Controls.Add(this.panel4);
@@ -135,6 +149,26 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(204, 720);
             this.panel2.TabIndex = 0;
+            // 
+            // BtnProducts
+            // 
+            this.BtnProducts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.BtnProducts.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnProducts.FlatAppearance.BorderSize = 0;
+            this.BtnProducts.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
+            this.BtnProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnProducts.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnProducts.ForeColor = System.Drawing.Color.White;
+            this.BtnProducts.Image = global::RestorantiApplication.Properties.Resources.Produtos;
+            this.BtnProducts.Location = new System.Drawing.Point(0, 405);
+            this.BtnProducts.Name = "BtnProducts";
+            this.BtnProducts.Size = new System.Drawing.Size(204, 100);
+            this.BtnProducts.TabIndex = 10;
+            this.BtnProducts.Text = "Produtos";
+            this.BtnProducts.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnProducts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnProducts.UseVisualStyleBackColor = false;
+            this.BtnProducts.Click += new System.EventHandler(this.BtnProducts_Click);
             // 
             // panel7
             // 
@@ -160,60 +194,61 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.panel5.Controls.Add(this.button3);
+            this.panel5.Controls.Add(this.BtnCategorys);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 305);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(204, 100);
             this.panel5.TabIndex = 3;
             // 
-            // button3
+            // BtnCategorys
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
-            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Image = global::RestorantiApplication.Properties.Resources.Produtos;
-            this.button3.Location = new System.Drawing.Point(0, 0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(204, 100);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Produtos";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button3.UseVisualStyleBackColor = false;
+            this.BtnCategorys.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.BtnCategorys.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnCategorys.FlatAppearance.BorderSize = 0;
+            this.BtnCategorys.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
+            this.BtnCategorys.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnCategorys.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnCategorys.ForeColor = System.Drawing.Color.White;
+            this.BtnCategorys.Image = ((System.Drawing.Image)(resources.GetObject("BtnCategorys.Image")));
+            this.BtnCategorys.Location = new System.Drawing.Point(0, 0);
+            this.BtnCategorys.Name = "BtnCategorys";
+            this.BtnCategorys.Size = new System.Drawing.Size(204, 100);
+            this.BtnCategorys.TabIndex = 1;
+            this.BtnCategorys.Text = "Categorias";
+            this.BtnCategorys.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnCategorys.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnCategorys.UseVisualStyleBackColor = false;
+            this.BtnCategorys.Click += new System.EventHandler(this.BtnCategorys_Click);
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.panel4.Controls.Add(this.button2);
+            this.panel4.Controls.Add(this.BtnUsers);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 205);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(204, 100);
             this.panel4.TabIndex = 2;
             // 
-            // button2
+            // BtnUsers
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Image = global::RestorantiApplication.Properties.Resources.usuario;
-            this.button2.Location = new System.Drawing.Point(0, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(204, 100);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Usuários";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button2.UseVisualStyleBackColor = false;
+            this.BtnUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.BtnUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnUsers.FlatAppearance.BorderSize = 0;
+            this.BtnUsers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
+            this.BtnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnUsers.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnUsers.ForeColor = System.Drawing.Color.White;
+            this.BtnUsers.Image = global::RestorantiApplication.Properties.Resources.usuario;
+            this.BtnUsers.Location = new System.Drawing.Point(0, 0);
+            this.BtnUsers.Name = "BtnUsers";
+            this.BtnUsers.Size = new System.Drawing.Size(204, 100);
+            this.BtnUsers.TabIndex = 1;
+            this.BtnUsers.Text = "Usuários";
+            this.BtnUsers.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnUsers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnUsers.UseVisualStyleBackColor = false;
             // 
             // panel3
             // 
@@ -288,8 +323,8 @@
         private Panel panel4;
         private Panel panel3;
         private PictureBox pictureBox1;
-        private Button button3;
-        private Button button2;
+        private Button BtnCategorys;
+        private Button BtnUsers;
         private Button button1;
         private Panel panel6;
         private Button BtnMinimize1;
@@ -297,5 +332,7 @@
         private Label LblUserLogged;
         private Button BtnLogout;
         private Panel panel7;
+        private Button BtnProducts;
+        private Panel PanelRender;
     }
 }
