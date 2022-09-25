@@ -1,11 +1,15 @@
-﻿using RestorantiApplication.Generics.Actions;
+﻿using Newtonsoft.Json;
+using RestorantiApplication.Generics.Actions;
 using RestorantiApplication.Generics.Logs;
+using RestorantiApplication.Models.Entities.VM;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,6 +18,8 @@ namespace RestorantiApplication.Views
 {
     public partial class RecoveryPasswordStep1 : Form
     {
+        private HttpClient _client;
+        private readonly static string baseUrl = ConfigurationManager.AppSettings["userInternal"].ToString();
         public RecoveryPasswordStep1()
         {
             InitializeComponent();
@@ -47,20 +53,40 @@ namespace RestorantiApplication.Views
                 }
                 else
                 {
-                    //Validar se existe o nome de usuário e o email.
+                    var userValidateRecoveryPassword = new UserValidateRecoveryPassword
+                    {
+                        Username = TxtUser.Text,
+                        Email = TxtEmail.Text
+                    };
 
+                    var request = JsonConvert.SerializeObject(userValidateRecoveryPassword);
+                    var contentString = new StringContent(request, Encoding.UTF8, "application/json");
+                    contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                    //Caso tenha abrir a próxima modal, solicitando a senha administrador.
-                    this.Close();
+                    _client = new HttpClient();
 
-                    var form = new RecoveryPasswordStep2();
-                    form.ShowDialog();
+                    HttpResponseMessage result = _client.PostAsync($"{baseUrl}/UserInternal/recoverypassword/validate", contentString).Result;
+
+                    if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        //Caso retorno seja um 200, deve solicitar a senha administrador para prosseguir. OBS: Dispose para liberar o recurso da modal atual.
+                        this.Dispose(true);
+
+                        var form = new RecoveryPasswordStep2(userValidateRecoveryPassword);
+                        form.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show(result.Content.ReadAsStringAsync().Result);
+                        TxtUser.Text = String.Empty;
+                        TxtEmail.Text = String.Empty;
+                        this.DialogResult = DialogResult.None;
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Logger.Write($"Erro ao encerrar ao executar o step1 do esqueceu senha. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
             }
         }
     }
