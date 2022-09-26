@@ -70,8 +70,10 @@
             // 
             // PanelRender
             // 
+            this.PanelRender.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.PanelRender.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelRender.Location = new System.Drawing.Point(204, 56);
+            this.PanelRender.Margin = new System.Windows.Forms.Padding(0);
             this.PanelRender.Name = "PanelRender";
             this.PanelRender.Size = new System.Drawing.Size(1076, 664);
             this.PanelRender.TabIndex = 2;
@@ -114,6 +116,7 @@
             this.BtnExit.TabIndex = 5;
             this.BtnExit.Text = "x";
             this.BtnExit.UseVisualStyleBackColor = true;
+            this.BtnExit.Click += new System.EventHandler(this.BtnExit_Click);
             // 
             // BtnMinimize1
             // 
@@ -134,6 +137,7 @@
             this.BtnMinimize1.TabIndex = 4;
             this.BtnMinimize1.Text = "-";
             this.BtnMinimize1.UseVisualStyleBackColor = true;
+            this.BtnMinimize1.Click += new System.EventHandler(this.BtnMinimize1_Click);
             // 
             // panel2
             // 

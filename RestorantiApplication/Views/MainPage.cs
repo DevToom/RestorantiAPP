@@ -1,4 +1,6 @@
-﻿using RestorantiApplication.Models.Entities;
+﻿using RestorantiApplication.Generics.Actions;
+using RestorantiApplication.Generics.Logs;
+using RestorantiApplication.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -62,5 +64,31 @@ namespace RestorantiApplication.Views
             }
         }
 
+        private void BtnMinimize1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao minimizar a aplicação. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+            }
+        }
+
+        private void BtnExit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (ActionsGenerics.Exit())
+                    this.Close();
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao encerrar a aplicação. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+            }
+        }
     }
 }
