@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -9,6 +11,8 @@ namespace RestorantiApplication.Models.Entities
 {
     public class Category : ModelBase
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         /// <summary>
         /// Nome da categoria
@@ -25,20 +29,19 @@ namespace RestorantiApplication.Models.Entities
         /// <summary>
         /// Imagem da categoria
         /// </summary>
-        [JsonIgnore]
-        public byte[]? bytesImage { get; set; }
+        public byte[] ImageContent { get; set; }
     }
 
     public enum EMenuType
     {
         Ambos = 0,
-        ALaCarte = 10,
-        Rodizio = 20
+        ÀLaCarte = 1,
+        Rodízio = 2
     }
 
     public enum ECategoryStatus
     {
-        Invativo = 0,
-        Ativo = 10
+        Ativo = 0,
+        Inativo = 1
     }
 }

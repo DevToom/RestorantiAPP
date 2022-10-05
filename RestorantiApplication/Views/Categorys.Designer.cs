@@ -35,6 +35,7 @@
             this.NameHeader = new System.Windows.Forms.ColumnHeader();
             this.MenuTypeHeader = new System.Windows.Forms.ColumnHeader();
             this.StatusHeader = new System.Windows.Forms.ColumnHeader();
+            this.ImageHeader = new System.Windows.Forms.ColumnHeader();
             this.panel3 = new System.Windows.Forms.Panel();
             this.BtnUploadImageCat = new System.Windows.Forms.Button();
             this.PbCategory = new System.Windows.Forms.PictureBox();
@@ -91,7 +92,8 @@
             this.IdHeader,
             this.NameHeader,
             this.MenuTypeHeader,
-            this.StatusHeader});
+            this.StatusHeader,
+            this.ImageHeader});
             this.ListCategorys.Location = new System.Drawing.Point(10, 6);
             this.ListCategorys.MultiSelect = false;
             this.ListCategorys.Name = "ListCategorys";
@@ -118,6 +120,11 @@
             // StatusHeader
             // 
             this.StatusHeader.Text = "Status";
+            // 
+            // ImageHeader
+            // 
+            this.ImageHeader.Text = "Imagem";
+            this.ImageHeader.Width = 0;
             // 
             // panel3
             // 
@@ -180,10 +187,6 @@
             this.ChkStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ChkStatus.Font = new System.Drawing.Font("Aleo", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ChkStatus.FormattingEnabled = true;
-            this.ChkStatus.Items.AddRange(new object[] {
-            "Selecione...",
-            "Ativo",
-            "Inativo"});
             this.ChkStatus.Location = new System.Drawing.Point(1040, 21);
             this.ChkStatus.Name = "ChkStatus";
             this.ChkStatus.Size = new System.Drawing.Size(175, 24);
@@ -218,10 +221,6 @@
             this.ChkMenuType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ChkMenuType.Font = new System.Drawing.Font("Aleo", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ChkMenuType.FormattingEnabled = true;
-            this.ChkMenuType.Items.AddRange(new object[] {
-            "Selecione...",
-            "À La Carte",
-            "Rodízio"});
             this.ChkMenuType.Location = new System.Drawing.Point(814, 19);
             this.ChkMenuType.Name = "ChkMenuType";
             this.ChkMenuType.Size = new System.Drawing.Size(158, 24);
@@ -396,5 +395,6 @@
         private PictureBox PbCategory;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Button BtnUploadImageCat;
+        private ColumnHeader ImageHeader;
     }
 }
