@@ -14,7 +14,8 @@ namespace RestorantiApplication.Views
     public partial class Categorys : Form
     {
         private HttpClient _client;
-        private readonly static string baseUrl = ConfigurationManager.AppSettings["category"].ToString();
+        private readonly static string _baseUrl = ConfigurationManager.AppSettings["category"].ToString();
+        private readonly static string _basePathImage = ConfigurationManager.AppSettings["basePathImage"].ToString();
         public Categorys()
         {
             InitializeComponent();
@@ -53,7 +54,7 @@ namespace RestorantiApplication.Views
                 PbCategory.Image = null;
 
                 _client = new HttpClient();
-                HttpResponseMessage result = _client.GetAsync($"{baseUrl}/Category").Result;
+                HttpResponseMessage result = _client.GetAsync($"{_baseUrl}/Category").Result;
 
                 var categorys = JsonConvert.DeserializeObject<List<Category>>(result.Content.ReadAsStringAsync().Result);
 
@@ -151,7 +152,7 @@ namespace RestorantiApplication.Views
                     var contentString = new StringContent(request, Encoding.UTF8, "application/json");
                     contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                    HttpResponseMessage result = _client.PostAsync($"{baseUrl}/Category/Update", contentString).Result;
+                    HttpResponseMessage result = _client.PostAsync($"{_baseUrl}/Category/Update", contentString).Result;
                     var response = JsonConvert.DeserializeObject<MessageResponse<Category>>(result.Content.ReadAsStringAsync().Result);
                     if (result.StatusCode == System.Net.HttpStatusCode.OK)
                     {
@@ -191,7 +192,7 @@ namespace RestorantiApplication.Views
                     ChkStatus.SelectedIndex = -1;
 
                     _client = new HttpClient();
-                    HttpResponseMessage result = _client.GetAsync($"{baseUrl}/Category/GetImage/{Convert.ToInt32(i.Text)}").Result;
+                    HttpResponseMessage result = _client.GetAsync($"{_baseUrl}/Category/GetImage/{Convert.ToInt32(i.Text)}").Result;
 
                     //Id da categoria
                     lblIdCategory.Text = i.Text;
@@ -269,7 +270,7 @@ namespace RestorantiApplication.Views
                         var contentString = new StringContent(request, Encoding.UTF8, "application/json");
                         contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                        HttpResponseMessage result = _client.PostAsync($"{baseUrl}/Category", contentString).Result;
+                        HttpResponseMessage result = _client.PostAsync($"{_baseUrl}/Category", contentString).Result;
                         var response = JsonConvert.DeserializeObject<MessageResponse<Category>>(result.Content.ReadAsStringAsync().Result);
                         if (result.StatusCode == System.Net.HttpStatusCode.OK)
                         {
@@ -319,7 +320,7 @@ namespace RestorantiApplication.Views
                             var contentString = new StringContent(request, Encoding.UTF8, "application/json");
                             contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                            HttpResponseMessage result = _client.PostAsync($"{baseUrl}/Category", contentString).Result;
+                            HttpResponseMessage result = _client.PostAsync($"{_baseUrl}/Category", contentString).Result;
                             var response = JsonConvert.DeserializeObject<MessageResponse<Category>>(result.Content.ReadAsStringAsync().Result);
                             if (result.StatusCode == System.Net.HttpStatusCode.OK)
                             {
@@ -374,7 +375,7 @@ namespace RestorantiApplication.Views
                         }
 
                         _client = new HttpClient();
-                        HttpResponseMessage result = _client.DeleteAsync($"{baseUrl}/Category/Delete/{Convert.ToInt32(lblIdCategory.Text)}").Result;
+                        HttpResponseMessage result = _client.DeleteAsync($"{_baseUrl}/Category/Delete/{Convert.ToInt32(lblIdCategory.Text)}").Result;
                         var response = JsonConvert.DeserializeObject<MessageResponse<Category>>(result.Content.ReadAsStringAsync().Result);
                         if (result.StatusCode == System.Net.HttpStatusCode.OK)
                         {
@@ -434,9 +435,9 @@ namespace RestorantiApplication.Views
                     HttpResponseMessage result;
 
                     if (string.IsNullOrEmpty(TxtCatName.Text))
-                        result = _client.GetAsync($"{baseUrl}/Category/ListWithFilter?MenuType={ChkMenuType.SelectedIndex}&Status={ChkStatus.SelectedIndex}").Result;
+                        result = _client.GetAsync($"{_baseUrl}/Category/ListWithFilter?MenuType={ChkMenuType.SelectedIndex}&Status={ChkStatus.SelectedIndex}").Result;
                     else
-                        result = _client.GetAsync($"{baseUrl}/Category/ListWithFilter?MenuType={ChkMenuType.SelectedIndex}&Status={ChkStatus.SelectedIndex}&Name={TxtCatName.Text}").Result;
+                        result = _client.GetAsync($"{_baseUrl}/Category/ListWithFilter?MenuType={ChkMenuType.SelectedIndex}&Status={ChkStatus.SelectedIndex}&Name={TxtCatName.Text}").Result;
 
                     var response = JsonConvert.DeserializeObject<MessageResponse<List<Category>>>(result.Content.ReadAsStringAsync().Result);
 
@@ -511,16 +512,15 @@ namespace RestorantiApplication.Views
             {
                 if (MessageBox.Show("Deseja realizar o download da imagem?", "Download", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    var path = @"C:\\Restoranti\\Imagens\\";
                     MemoryStream ms = new MemoryStream();
                     using (var myBitmap = new Bitmap(PbCategory.Image))
                     {
                         myBitmap.Save(ms, ImageFormat.Jpeg);
                     }
 
-                    if (File.Exists(path + TxtCatName.Text + ".jpg"))
+                    if (File.Exists(_basePathImage + TxtCatName.Text + ".jpg"))
                     {
-                        var folderName = path.Replace(@"\\", "/");
+                        var folderName = _basePathImage.Replace(@"\\", "/");
                         folderName = folderName.Substring(0, folderName.Length - 1);
                         if (MessageBox.Show($"Existe uma imagem com o nome {TxtCatName.Text} salvo em {folderName}. Você deseja substituir?", "ATENÇÃO", MessageBoxButtons.YesNo) == DialogResult.Yes)
                             File.WriteAllBytes(@$"C:\\Restoranti\\Imagens\\{TxtCatName.Text}.jpg", ms.ToArray());
