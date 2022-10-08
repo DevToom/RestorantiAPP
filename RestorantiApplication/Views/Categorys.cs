@@ -64,7 +64,7 @@ namespace RestorantiApplication.Views
                     foreach (var i in categorys)
                     {
                         //Passar como parâmetro o ID da categoria
-                        string[] rows = { i.Id.ToString(), i.Name, i.MenuType.ToString(), i.Status.ToString(), Encoding.ASCII.GetString(i.ImageContent) };
+                        string[] rows = { i.Id.ToString(), i.Name, i.MenuType.ToString(), i.Status.ToString(), i.ImageContent != null ? Encoding.ASCII.GetString(i.ImageContent) : null };
 
                         ListCategorys.Items.Add(new ListViewItem(rows));
                     }
@@ -119,6 +119,7 @@ namespace RestorantiApplication.Views
                         TxtCatName.Enabled = true;
                         ChkMenuType.Enabled = true;
                         ChkStatus.Enabled = true;
+                        BtnUploadImageCat.Visible = true;
                         BtnUploadImageCat.Enabled = true;
 
                         BtnUpdate.Text = "Salvar";
@@ -187,6 +188,7 @@ namespace RestorantiApplication.Views
                 ChkStatus.Text = String.Empty;
                 PbCategory.Image = null;
                 BtnSaveImage.Visible = false;
+                BtnUploadImageCat.Visible = false;
                 BtnAdd.Text = "Novo";
 
                 foreach (var i in ListCategorys.SelectedItems.Cast<ListViewItem>().ToList())
@@ -216,18 +218,24 @@ namespace RestorantiApplication.Views
                     if (result.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         var category = JsonConvert.DeserializeObject<Category>(result.Content.ReadAsStringAsync().Result);
-                        using (var memoryStream = new MemoryStream(category.ImageContent))
+
+                        if (category.ImageContent != null)
                         {
-                            PbCategory.Image = Image.FromStream(memoryStream, true);
-                            BtnUploadImageCat.Enabled = false;
+                            using (var memoryStream = new MemoryStream(category.ImageContent))
+                            {
+                                PbCategory.Image = Image.FromStream(memoryStream, true);
+                                BtnUploadImageCat.Enabled = false;
+                            }
                         }
+
                     }
 
                     if (PbCategory.Image != null)
+                    {
+                        LblImagem.Visible = true;
                         BtnSaveImage.Visible = true;
-
-
-                    PanelImageBorder.Visible = true;
+                        PanelImageBorder.Visible = true;
+                    }
                 }
             }
             catch (Exception ex)
