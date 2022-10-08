@@ -194,6 +194,7 @@
             this.BtnLogout.Size = new System.Drawing.Size(204, 100);
             this.BtnLogout.TabIndex = 8;
             this.BtnLogout.UseVisualStyleBackColor = true;
+            this.BtnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
             // 
             // panel5
             // 

@@ -32,7 +32,7 @@
             this.LblSair = new System.Windows.Forms.Label();
             this.BtnNo = new System.Windows.Forms.Button();
             this.BtnYes = new System.Windows.Forms.Button();
-            this.BtnMessage = new System.Windows.Forms.Label();
+            this.TxtMessage = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,15 +84,15 @@
             this.BtnYes.Text = "SIM";
             this.BtnYes.UseVisualStyleBackColor = true;
             // 
-            // BtnMessage
+            // TxtMessage
             // 
-            this.BtnMessage.AutoSize = true;
-            this.BtnMessage.Font = new System.Drawing.Font("Aleo", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnMessage.Location = new System.Drawing.Point(70, 98);
-            this.BtnMessage.Name = "BtnMessage";
-            this.BtnMessage.Size = new System.Drawing.Size(368, 25);
-            this.BtnMessage.TabIndex = 3;
-            this.BtnMessage.Text = "Você deseja confirmar essa operação?";
+            this.TxtMessage.AutoSize = true;
+            this.TxtMessage.Font = new System.Drawing.Font("Aleo", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TxtMessage.Location = new System.Drawing.Point(70, 98);
+            this.TxtMessage.Name = "TxtMessage";
+            this.TxtMessage.Size = new System.Drawing.Size(368, 25);
+            this.TxtMessage.TabIndex = 3;
+            this.TxtMessage.Text = "Você deseja confirmar essa operação?";
             // 
             // ConfirmModal
             // 
@@ -102,12 +102,13 @@
             this.ClientSize = new System.Drawing.Size(500, 300);
             this.Controls.Add(this.BtnNo);
             this.Controls.Add(this.BtnYes);
-            this.Controls.Add(this.BtnMessage);
+            this.Controls.Add(this.TxtMessage);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ConfirmModal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ConfirmModal";
+            this.Load += new System.EventHandler(this.ConfirmModal_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -121,6 +122,6 @@
         private Label LblSair;
         private Button BtnNo;
         private Button BtnYes;
-        private Label BtnMessage;
+        private Label TxtMessage;
     }
 }

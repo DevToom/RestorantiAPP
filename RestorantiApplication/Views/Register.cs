@@ -2,6 +2,7 @@
 using RestorantiApplication.Generics.Actions;
 using RestorantiApplication.Generics.Logs;
 using RestorantiApplication.Models.Entities;
+using RestorantiApplication.Models.Entities.Constants;
 using RestorantiApplication.Models.Enums;
 using System;
 using System.Collections.Generic;
@@ -68,7 +69,7 @@ namespace RestorantiApplication.Views
                     }
                     else
                     {
-                        if (ActionsGenerics.ConfirmCustom())
+                        if (ActionsGenerics.ConfirmCustom(Constants.CONFIRM_OPERATION))
                         {
                             //Chamar a rota API de register de usuários.
                             _client = new HttpClient();

@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace RestorantiApplication.Views
 {
-    
+
     public partial class Kitchen : Form
     {
         private HttpClient _client = new HttpClient();
@@ -29,11 +29,25 @@ namespace RestorantiApplication.Views
         {
             try
             {
-                HttpResponseMessage result = _client.GetAsync($"{baseUrl}/Order/GetListOrder").Result;//_client.PostAsync($"{baseUrl}/UserInternal/Login", contentString).Result;
+                //HttpResponseMessage result = _client.GetAsync($"{baseUrl}/Order/GetListOrder").Result;//_client.PostAsync($"{baseUrl}/UserInternal/Login", contentString).Result;
 
-                if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                //if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                if (true == true)
                 {
-                    var orders = JsonConvert.DeserializeObject<List<Order>>(await result.Content.ReadAsStringAsync());
+                    //var orders = JsonConvert.DeserializeObject<List<Order>>(await result.Content.ReadAsStringAsync());
+                    List<Order> orders = new List<Order>();
+                    for (int i = 1; i < 10; i++)
+                    {
+                        orders.Add(new Order
+                        {
+                            HasObservation = false,
+                            Itens = new List<Product>(),
+                            OrderId = i,
+                            TableNumber = i,
+                            UserId = 10
+                    });
+                    }
+
                     foreach (var i in orders)
                     {
                         Label lblTitleOrder = AddTitleOrder(i);
@@ -56,7 +70,7 @@ namespace RestorantiApplication.Views
 
                 throw;
             }
-            
+
         }
 
         /// <summary>
@@ -212,7 +226,7 @@ namespace RestorantiApplication.Views
             btn.FlatAppearance.BorderSize = 0;
             btn.BackColor = Color.FromArgb(11, 7, 17);
             btn.FlatAppearance.MouseOverBackColor = Color.Green;
-            btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(32,30,45);
+            btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(32, 30, 45);
             btn.Size = new Size(232, 30);
             btn.UseVisualStyleBackColor = true;
             btn.TextAlign = ContentAlignment.MiddleCenter;

@@ -37,8 +37,9 @@
             this.StatusHeader = new System.Windows.Forms.ColumnHeader();
             this.ImageHeader = new System.Windows.Forms.ColumnHeader();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.BtnUploadImageCat = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.PbCategory = new System.Windows.Forms.PictureBox();
+            this.BtnUploadImageCat = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.ChkStatus = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -54,9 +55,11 @@
             this.lblFormName = new System.Windows.Forms.Label();
             this.lblIdCategory = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.BtnSaveImage = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbCategory)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -78,9 +81,9 @@
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
             this.panel4.Controls.Add(this.ListCategorys);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 596);
+            this.panel4.Location = new System.Drawing.Point(0, 491);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1280, 124);
+            this.panel4.Size = new System.Drawing.Size(1280, 229);
             this.panel4.TabIndex = 3;
             // 
             // ListCategorys
@@ -94,10 +97,11 @@
             this.MenuTypeHeader,
             this.StatusHeader,
             this.ImageHeader});
+            this.ListCategorys.Font = new System.Drawing.Font("Aleo", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ListCategorys.Location = new System.Drawing.Point(10, 6);
             this.ListCategorys.MultiSelect = false;
             this.ListCategorys.Name = "ListCategorys";
-            this.ListCategorys.Size = new System.Drawing.Size(1258, 106);
+            this.ListCategorys.Size = new System.Drawing.Size(1258, 211);
             this.ListCategorys.TabIndex = 0;
             this.ListCategorys.UseCompatibleStateImageBehavior = false;
             this.ListCategorys.View = System.Windows.Forms.View.Details;
@@ -120,6 +124,7 @@
             // StatusHeader
             // 
             this.StatusHeader.Text = "Status";
+            this.StatusHeader.Width = 200;
             // 
             // ImageHeader
             // 
@@ -129,8 +134,9 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
+            this.panel3.Controls.Add(this.BtnSaveImage);
+            this.panel3.Controls.Add(this.panel5);
             this.panel3.Controls.Add(this.BtnUploadImageCat);
-            this.panel3.Controls.Add(this.PbCategory);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.ChkStatus);
             this.panel3.Controls.Add(this.label3);
@@ -145,13 +151,36 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 35);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1280, 561);
+            this.panel3.Size = new System.Drawing.Size(1280, 456);
             this.panel3.TabIndex = 2;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.White;
+            this.panel5.Controls.Add(this.PbCategory);
+            this.panel5.Location = new System.Drawing.Point(12, 88);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(310, 310);
+            this.panel5.TabIndex = 13;
+            // 
+            // PbCategory
+            // 
+            this.PbCategory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PbCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
+            this.PbCategory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.PbCategory.Location = new System.Drawing.Point(5, 5);
+            this.PbCategory.Name = "PbCategory";
+            this.PbCategory.Size = new System.Drawing.Size(300, 300);
+            this.PbCategory.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PbCategory.TabIndex = 11;
+            this.PbCategory.TabStop = false;
             // 
             // BtnUploadImageCat
             // 
             this.BtnUploadImageCat.Font = new System.Drawing.Font("Aleo", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnUploadImageCat.Location = new System.Drawing.Point(94, 93);
+            this.BtnUploadImageCat.Location = new System.Drawing.Point(92, 61);
             this.BtnUploadImageCat.Name = "BtnUploadImageCat";
             this.BtnUploadImageCat.Size = new System.Drawing.Size(129, 23);
             this.BtnUploadImageCat.TabIndex = 12;
@@ -159,23 +188,12 @@
             this.BtnUploadImageCat.UseVisualStyleBackColor = true;
             this.BtnUploadImageCat.Click += new System.EventHandler(this.BtnUploadImageCat_Click);
             // 
-            // PbCategory
-            // 
-            this.PbCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.PbCategory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.PbCategory.Location = new System.Drawing.Point(12, 122);
-            this.PbCategory.Name = "PbCategory";
-            this.PbCategory.Size = new System.Drawing.Size(350, 350);
-            this.PbCategory.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PbCategory.TabIndex = 11;
-            this.PbCategory.TabStop = false;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(12, 93);
+            this.label4.Location = new System.Drawing.Point(10, 61);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 19);
             this.label4.TabIndex = 10;
@@ -185,22 +203,22 @@
             // 
             this.ChkStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ChkStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ChkStatus.Font = new System.Drawing.Font("Aleo", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ChkStatus.Font = new System.Drawing.Font("Aleo", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ChkStatus.FormattingEnabled = true;
             this.ChkStatus.Location = new System.Drawing.Point(1040, 21);
             this.ChkStatus.Name = "ChkStatus";
-            this.ChkStatus.Size = new System.Drawing.Size(175, 24);
+            this.ChkStatus.Size = new System.Drawing.Size(175, 31);
             this.ChkStatus.TabIndex = 9;
             // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Font = new System.Drawing.Font("Aleo", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(980, 21);
+            this.label3.Location = new System.Drawing.Point(978, 19);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 19);
+            this.label3.Size = new System.Drawing.Size(63, 23);
             this.label3.TabIndex = 8;
             this.label3.Text = "Status";
             // 
@@ -209,43 +227,43 @@
             this.TxtCatName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtCatName.BackColor = System.Drawing.Color.White;
-            this.TxtCatName.Font = new System.Drawing.Font("Aleo", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TxtCatName.Font = new System.Drawing.Font("Aleo", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TxtCatName.Location = new System.Drawing.Point(65, 19);
             this.TxtCatName.Name = "TxtCatName";
-            this.TxtCatName.Size = new System.Drawing.Size(592, 23);
+            this.TxtCatName.Size = new System.Drawing.Size(592, 30);
             this.TxtCatName.TabIndex = 7;
             // 
             // ChkMenuType
             // 
             this.ChkMenuType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ChkMenuType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ChkMenuType.Font = new System.Drawing.Font("Aleo", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ChkMenuType.Font = new System.Drawing.Font("Aleo", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ChkMenuType.FormattingEnabled = true;
             this.ChkMenuType.Location = new System.Drawing.Point(814, 19);
             this.ChkMenuType.Name = "ChkMenuType";
-            this.ChkMenuType.Size = new System.Drawing.Size(158, 24);
+            this.ChkMenuType.Size = new System.Drawing.Size(158, 31);
             this.ChkMenuType.TabIndex = 6;
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Font = new System.Drawing.Font("Aleo", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(680, 19);
+            this.label2.Location = new System.Drawing.Point(663, 19);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 19);
+            this.label2.Size = new System.Drawing.Size(153, 23);
             this.label2.TabIndex = 5;
             this.label2.Text = "Tipo de Cardápio";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Aleo", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(8, 21);
+            this.label1.Location = new System.Drawing.Point(3, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 19);
+            this.label1.Size = new System.Drawing.Size(61, 23);
             this.label1.TabIndex = 4;
             this.label1.Text = "Nome";
             // 
@@ -257,7 +275,7 @@
             this.BtnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnUpdate.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BtnUpdate.ForeColor = System.Drawing.Color.White;
-            this.BtnUpdate.Location = new System.Drawing.Point(856, 509);
+            this.BtnUpdate.Location = new System.Drawing.Point(856, 404);
             this.BtnUpdate.Name = "BtnUpdate";
             this.BtnUpdate.Size = new System.Drawing.Size(121, 31);
             this.BtnUpdate.TabIndex = 3;
@@ -273,7 +291,7 @@
             this.BtnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnRemove.Font = new System.Drawing.Font("Aleo", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BtnRemove.ForeColor = System.Drawing.Color.White;
-            this.BtnRemove.Location = new System.Drawing.Point(1147, 511);
+            this.BtnRemove.Location = new System.Drawing.Point(1147, 406);
             this.BtnRemove.Name = "BtnRemove";
             this.BtnRemove.Size = new System.Drawing.Size(121, 31);
             this.BtnRemove.TabIndex = 2;
@@ -289,7 +307,7 @@
             this.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnAdd.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BtnAdd.ForeColor = System.Drawing.Color.White;
-            this.BtnAdd.Location = new System.Drawing.Point(1003, 509);
+            this.BtnAdd.Location = new System.Drawing.Point(1003, 404);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(121, 31);
             this.BtnAdd.TabIndex = 1;
@@ -306,7 +324,7 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(12, 509);
+            this.btnSearch.Location = new System.Drawing.Point(12, 404);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(121, 31);
             this.btnSearch.TabIndex = 0;
@@ -346,10 +364,22 @@
             this.lblIdCategory.Size = new System.Drawing.Size(0, 19);
             this.lblIdCategory.TabIndex = 10;
             // 
+            // BtnSaveImage
+            // 
+            this.BtnSaveImage.Font = new System.Drawing.Font("Aleo", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnSaveImage.Location = new System.Drawing.Point(328, 375);
+            this.BtnSaveImage.Name = "BtnSaveImage";
+            this.BtnSaveImage.Size = new System.Drawing.Size(108, 23);
+            this.BtnSaveImage.TabIndex = 14;
+            this.BtnSaveImage.Text = "Salvar imagem";
+            this.BtnSaveImage.UseVisualStyleBackColor = true;
+            this.BtnSaveImage.Click += new System.EventHandler(this.BtnSaveImage_Click);
+            // 
             // Categorys
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(1280, 720);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -361,6 +391,7 @@
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PbCategory)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -396,5 +427,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Button BtnUploadImageCat;
         private ColumnHeader ImageHeader;
+        private Panel panel5;
+        private Button BtnSaveImage;
     }
 }

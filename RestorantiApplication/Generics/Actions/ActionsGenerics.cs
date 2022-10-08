@@ -39,11 +39,11 @@ namespace RestorantiApplication.Generics.Actions
         /// Quando for para confirmar qualquer operação.
         /// </summary>
         /// <returns></returns>
-        public static bool ConfirmCustom()
+        public static bool ConfirmCustom(string Message)
         {
             try
             {
-                using (var form = new ConfirmModal())
+                using (var form = new ConfirmModal(Message))
                 {
                     form.ShowDialog();
                     if (form.DialogResult == DialogResult.Yes)

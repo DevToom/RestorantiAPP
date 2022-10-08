@@ -4,6 +4,7 @@ using RestorantiApplication.Models.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Data;
+using System.Drawing.Imaging;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
@@ -26,39 +27,60 @@ namespace RestorantiApplication.Views
         /// <param name="e"></param>
         private void Categorys_Load(object sender, EventArgs e)
         {
-            //Reset Combobox's
-            ChkStatus.Items.Clear();
-            ChkMenuType.Items.Clear();
-
-            //Set list value enum combobox's
-            ChkMenuType.Items.AddRange(Enum.GetNames(typeof(EMenuType)));
-            ChkStatus.Items.AddRange(Enum.GetNames(typeof(ECategoryStatus)));
-
-            //Set value default combobox's
-            ChkMenuType.SelectedIndex = 0;
-            ChkStatus.SelectedIndex = 0;
-
-            //Set value default txtBox/Label and PictureBox
-            TxtCatName.Text = String.Empty;
-            lblIdCategory.Text = 0.ToString();
-            PbCategory.Image = null;
-
-            _client = new HttpClient();
-            HttpResponseMessage result = _client.GetAsync($"{baseUrl}/Category").Result;
-
-            var categorys = JsonConvert.DeserializeObject<List<Category>>(result.Content.ReadAsStringAsync().Result);
-
-            if (categorys?.Count > 0)
+            try
             {
-                //Clear list before add new itens.
-                ListCategorys.Items.Clear();
-                foreach (var i in categorys)
+                BtnSaveImage.Visible = false;
+                //VisibleAll = True
+                foreach (Control c in this.Controls)
                 {
-                    //Passar como parâmetro o ID da categoria
-                    string[] rows = { i.Id.ToString(), i.Name, i.MenuType.ToString(), i.Status.ToString(), Encoding.ASCII.GetString(i.ImageContent) };
-
-                    ListCategorys.Items.Add(new ListViewItem(rows));
+                    c.Visible = false;
                 }
+                //Reset Combobox's
+                ChkStatus.Items.Clear();
+                ChkMenuType.Items.Clear();
+
+                //Set list value enum combobox's
+                ChkMenuType.Items.AddRange(Enum.GetNames(typeof(EMenuType)));
+                ChkStatus.Items.AddRange(Enum.GetNames(typeof(ECategoryStatus)));
+
+                //Set value default combobox's
+                ChkMenuType.SelectedIndex = 0;
+                ChkStatus.SelectedIndex = 0;
+
+                //Set value default txtBox/Label and PictureBox
+                TxtCatName.Text = String.Empty;
+                lblIdCategory.Text = 0.ToString();
+                PbCategory.Image = null;
+
+                _client = new HttpClient();
+                HttpResponseMessage result = _client.GetAsync($"{baseUrl}/Category").Result;
+
+                var categorys = JsonConvert.DeserializeObject<List<Category>>(result.Content.ReadAsStringAsync().Result);
+
+                if (categorys?.Count > 0)
+                {
+                    //Clear list before add new itens.
+                    ListCategorys.Items.Clear();
+                    foreach (var i in categorys)
+                    {
+                        //Passar como parâmetro o ID da categoria
+                        string[] rows = { i.Id.ToString(), i.Name, i.MenuType.ToString(), i.Status.ToString(), Encoding.ASCII.GetString(i.ImageContent) };
+
+                        ListCategorys.Items.Add(new ListViewItem(rows));
+                    }
+                }
+
+                //VisibleAll = True
+                foreach (Control c in this.Controls)
+                {
+                    c.Visible = true;
+                }
+
+                panel5.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao carregar a página geral de categorias. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
             }
         }
 
@@ -69,77 +91,81 @@ namespace RestorantiApplication.Views
         /// <param name="e"></param>
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
-            if (BtnUpdate.Text.Equals("Editar"))
+            try
             {
-                var listOfAllSelected = ListCategorys.SelectedItems.Cast<ListViewItem>().ToList();
-                if (listOfAllSelected?.Count > 0)
+                if (BtnUpdate.Text.Equals("Editar"))
                 {
-                    foreach (var i in listOfAllSelected)
+                    var listOfAllSelected = ListCategorys.SelectedItems.Cast<ListViewItem>().ToList();
+                    if (listOfAllSelected?.Count > 0)
                     {
-                        //Id da categoria
-                        lblIdCategory.Text = i.Text;
+                        foreach (var i in listOfAllSelected)
+                        {
+                            //Id da categoria
+                            lblIdCategory.Text = i.Text;
 
-                        //Nome da categoria
-                        TxtCatName.Text = i.SubItems[1].Text;
+                            //Nome da categoria
+                            TxtCatName.Text = i.SubItems[1].Text;
 
-                        //Tipo do cardápio
-                        ChkMenuType.SelectedIndex = (int)(EMenuType)Enum.Parse(typeof(EMenuType), i.SubItems[2].Text, true);
+                            //Tipo do cardápio
+                            ChkMenuType.SelectedIndex = (int)(EMenuType)Enum.Parse(typeof(EMenuType), i.SubItems[2].Text, true);
 
-                        //Status da categoria
-                        ChkStatus.SelectedIndex = (int)(ECategoryStatus)Enum.Parse(typeof(ECategoryStatus), i.SubItems[3].Text, true);
+                            //Status da categoria
+                            ChkStatus.SelectedIndex = (int)(ECategoryStatus)Enum.Parse(typeof(ECategoryStatus), i.SubItems[3].Text, true);
+                        }
+
+                        TxtCatName.Enabled = true;
+                        ChkMenuType.Enabled = true;
+                        ChkStatus.Enabled = true;
+                        BtnUploadImageCat.Enabled = true;
+
+                        BtnUpdate.Text = "Salvar";
                     }
-
-                    TxtCatName.Enabled = true;
-                    ChkMenuType.Enabled = true;
-                    ChkStatus.Enabled = true;
-                    BtnUploadImageCat.Enabled = true;
-
-                    BtnUpdate.Text = "Salvar";
-                }
-                else
-                {
-                    MessageBox.Show("Selecione uma categoria para conseguir editar!");
-                }
-            }
-            else if (BtnUpdate.Text.Equals("Salvar"))
-            {
-                _client = new HttpClient();
-                byte[] imageContent = null;
-
-                //Validar se fez o upload de uma imagem
-                if (PbCategory.Image != null)
-                {
-                    using (var ms = new MemoryStream())
+                    else
                     {
-                        PbCategory.Image.Save(ms, PbCategory.Image.RawFormat);
-                        imageContent = ms.ToArray();
+                        MessageBox.Show("Selecione uma categoria para conseguir editar!");
                     }
                 }
-
-                var category = new Category
+                else if (BtnUpdate.Text.Equals("Salvar"))
                 {
-                    Id = Convert.ToInt32(lblIdCategory.Text),
-                    Name = TxtCatName.Text,
-                    ImageContent = imageContent,
-                    MenuType = (EMenuType)Enum.Parse(typeof(EMenuType), ChkMenuType.SelectedIndex.ToString(), true),
-                    Status = (ECategoryStatus)Enum.Parse(typeof(ECategoryStatus), ChkStatus.SelectedIndex.ToString(), true),
-                    ModifiedDate = DateTime.Now,
-                    ModifiedUserId = UserLogged.UserId
-                };
+                    _client = new HttpClient();
+                    byte[] imageContent = null;
 
-                var request = JsonConvert.SerializeObject(category);
-                var contentString = new StringContent(request, Encoding.UTF8, "application/json");
-                contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    //Validar se fez o upload de uma imagem
+                    if (PbCategory.Image != null)
+                    {
+                        imageContent = ImageForBytesArray(PbCategory.Image);
+                    }
 
-                HttpResponseMessage result = _client.PostAsync($"{baseUrl}/Category/Update", contentString).Result;
-                var response = JsonConvert.DeserializeObject<MessageResponse<Category>>(result.Content.ReadAsStringAsync().Result);
-                if (result.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    MessageBox.Show(response.Message);
-                    BtnUpdate.Text = "Editar";
-                    Categorys_Load(sender, e);
+                    var category = new Category
+                    {
+                        Id = Convert.ToInt32(lblIdCategory.Text),
+                        Name = TxtCatName.Text,
+                        ImageContent = imageContent,
+                        MenuType = (EMenuType)Enum.Parse(typeof(EMenuType), ChkMenuType.SelectedIndex.ToString(), true),
+                        Status = (ECategoryStatus)Enum.Parse(typeof(ECategoryStatus), ChkStatus.SelectedIndex.ToString(), true),
+                        ModifiedDate = DateTime.Now,
+                        ModifiedUserId = UserLogged.UserId
+                    };
+
+                    var request = JsonConvert.SerializeObject(category);
+                    var contentString = new StringContent(request, Encoding.UTF8, "application/json");
+                    contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    HttpResponseMessage result = _client.PostAsync($"{baseUrl}/Category/Update", contentString).Result;
+                    var response = JsonConvert.DeserializeObject<MessageResponse<Category>>(result.Content.ReadAsStringAsync().Result);
+                    if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        MessageBox.Show(response.Message);
+                        BtnUpdate.Text = "Editar";
+                        Categorys_Load(sender, e);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao tentar atualizar/salvar dados de uma categoria. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+            }
+
         }
 
         /// <summary>
@@ -149,47 +175,61 @@ namespace RestorantiApplication.Views
         /// <param name="e"></param>
         private void ListCategorys_Click(object sender, EventArgs e)
         {
-            BtnUpdate.Text = "Editar";
-            TxtCatName.Text = String.Empty;
-            ChkMenuType.Text = String.Empty;
-            ChkStatus.Text = String.Empty;
-            PbCategory.Image = null;
-
-            foreach (var i in ListCategorys.SelectedItems.Cast<ListViewItem>().ToList())
+            try
             {
-                ChkMenuType.SelectedIndex = -1;
-                ChkStatus.SelectedIndex = -1;
+                panel5.Visible = false;
+                BtnUpdate.Text = "Editar";
+                TxtCatName.Text = String.Empty;
+                ChkMenuType.Text = String.Empty;
+                ChkStatus.Text = String.Empty;
+                PbCategory.Image = null;
+                BtnSaveImage.Visible = false;
 
-                _client = new HttpClient();
-                HttpResponseMessage result = _client.GetAsync($"{baseUrl}/Category/GetImage/{Convert.ToInt32(i.Text)}").Result;
-
-                //Id da categoria
-                lblIdCategory.Text = i.Text;
-
-                //Nome da categoria
-                TxtCatName.Text = i.SubItems[1].Text;
-                TxtCatName.Enabled = false;
-
-                //Tipo do cardápio
-                ChkMenuType.SelectedIndex = (int)(EMenuType)Enum.Parse(typeof(EMenuType), i.SubItems[2].Text, true);
-                ChkMenuType.Enabled = false;
-
-                //Status da categoria
-                ChkStatus.SelectedIndex = (int)(ECategoryStatus)Enum.Parse(typeof(ECategoryStatus), i.SubItems[3].Text, true);
-                ChkStatus.Enabled = false;
-
-
-                if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                foreach (var i in ListCategorys.SelectedItems.Cast<ListViewItem>().ToList())
                 {
-                    var category = JsonConvert.DeserializeObject<Category>(result.Content.ReadAsStringAsync().Result);
-                    using (var memoryStream = new MemoryStream(category.ImageContent))
+                    ChkMenuType.SelectedIndex = -1;
+                    ChkStatus.SelectedIndex = -1;
+
+                    _client = new HttpClient();
+                    HttpResponseMessage result = _client.GetAsync($"{baseUrl}/Category/GetImage/{Convert.ToInt32(i.Text)}").Result;
+
+                    //Id da categoria
+                    lblIdCategory.Text = i.Text;
+
+                    //Nome da categoria
+                    TxtCatName.Text = i.SubItems[1].Text;
+                    TxtCatName.Enabled = false;
+
+                    //Tipo do cardápio
+                    ChkMenuType.SelectedIndex = (int)(EMenuType)Enum.Parse(typeof(EMenuType), i.SubItems[2].Text, true);
+                    ChkMenuType.Enabled = false;
+
+                    //Status da categoria
+                    ChkStatus.SelectedIndex = (int)(ECategoryStatus)Enum.Parse(typeof(ECategoryStatus), i.SubItems[3].Text, true);
+                    ChkStatus.Enabled = false;
+
+
+                    if (result.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        PbCategory.Image = Image.FromStream(memoryStream, true);
-                        BtnUploadImageCat.Enabled = false;
+                        var category = JsonConvert.DeserializeObject<Category>(result.Content.ReadAsStringAsync().Result);
+                        using (var memoryStream = new MemoryStream(category.ImageContent))
+                        {
+                            PbCategory.Image = Image.FromStream(memoryStream, true);
+                            BtnUploadImageCat.Enabled = false;
+                        }
                     }
+
+                    if (PbCategory.Image != null)
+                        BtnSaveImage.Visible = true;
+
+
+                    panel5.Visible = true;
                 }
             }
-
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao atualizar formulário de categoria ao selecionar um da lista. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+            }
         }
 
         /// <summary>
@@ -212,11 +252,7 @@ namespace RestorantiApplication.Views
                         //Validar se fez o upload de uma imagem
                         if (PbCategory.Image != null)
                         {
-                            using (var ms = new MemoryStream())
-                            {
-                                PbCategory.Image.Save(ms, PbCategory.Image.RawFormat);
-                                imageContent = ms.ToArray();
-                            }
+                            imageContent = ImageForBytesArray(PbCategory.Image);
                         }
 
                         var category = new Category
@@ -266,11 +302,7 @@ namespace RestorantiApplication.Views
                             //Validar se fez o upload de uma imagem
                             if (PbCategory.Image != null)
                             {
-                                using (var ms = new MemoryStream())
-                                {
-                                    PbCategory.Image.Save(ms, PbCategory.Image.RawFormat);
-                                    imageContent = ms.ToArray();
-                                }
+                                imageContent = ImageForBytesArray(PbCategory.Image);
                             }
 
                             var category = new Category
@@ -325,39 +357,49 @@ namespace RestorantiApplication.Views
         /// <param name="e"></param>
         private void BtnRemove_Click(object sender, EventArgs e)
         {
-            BtnUpdate.Text = "Editar";
-
-            var listOfAllSelected = ListCategorys.SelectedItems.Cast<ListViewItem>().ToList();
-            if (listOfAllSelected?.Count > 0)
+            try
             {
-                foreach (var i in listOfAllSelected)
-                {
-                    //Id da categoria
-                    lblIdCategory.Text = i.Text;
-                }
+                BtnUpdate.Text = "Editar";
 
-                _client = new HttpClient();
-                HttpResponseMessage result = _client.DeleteAsync($"{baseUrl}/Category/Delete/{Convert.ToInt32(lblIdCategory.Text)}").Result;
-                var response = JsonConvert.DeserializeObject<MessageResponse<Category>>(result.Content.ReadAsStringAsync().Result);
-                if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                var listOfAllSelected = ListCategorys.SelectedItems.Cast<ListViewItem>().ToList();
+                if (listOfAllSelected?.Count > 0)
                 {
-                    MessageBox.Show(response.Message);
-                    Categorys_Load(sender, e);
+                    if (MessageBox.Show("Tem certeza que deseja excluir a categoria?", "Atenção!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
 
-                    TxtCatName.Enabled = true;
-                    ChkMenuType.Enabled = true;
-                    ChkStatus.Enabled = true;
-                    BtnUploadImageCat.Enabled = true;
+                        foreach (var i in listOfAllSelected)
+                        {
+                            //Id da categoria
+                            lblIdCategory.Text = i.Text;
+                        }
+
+                        _client = new HttpClient();
+                        HttpResponseMessage result = _client.DeleteAsync($"{baseUrl}/Category/Delete/{Convert.ToInt32(lblIdCategory.Text)}").Result;
+                        var response = JsonConvert.DeserializeObject<MessageResponse<Category>>(result.Content.ReadAsStringAsync().Result);
+                        if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            MessageBox.Show(response.Message);
+                            Categorys_Load(sender, e);
+
+                            TxtCatName.Enabled = true;
+                            ChkMenuType.Enabled = true;
+                            ChkStatus.Enabled = true;
+                            BtnUploadImageCat.Enabled = true;
+                        }
+                        else
+                            MessageBox.Show(response.Message);
+                    }
                 }
                 else
-                    MessageBox.Show(response.Message);
+                {
+                    MessageBox.Show("Selecione uma categoria para conseguir remover!");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Selecione uma categoria para conseguir editar!");
+                Logger.Write($"Erro ao remover uma categoria.Exception: {ex.Message} StackTrace: {ex.StackTrace}");
             }
         }
-
 
         /// <summary>
         /// Botão de Pesquisar
@@ -366,57 +408,64 @@ namespace RestorantiApplication.Views
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            BtnUpdate.Text = "Editar";
-
-            //Caso o campo nome esteja desabilitado provavelmente todos vão estar. Habilitar
-            if (!TxtCatName.Enabled)
+            try
             {
-                MessageBox.Show("Habilitando todos os campos de pesquisa!");
-                TxtCatName.Enabled = true;
-                ChkMenuType.Enabled = true;
-                ChkStatus.Enabled = true;
-                BtnUploadImageCat.Enabled = true;
-            }
-            else
-            {
-                if (
-                    string.IsNullOrEmpty(TxtCatName.Text) &&
-                    string.IsNullOrEmpty(ChkMenuType.SelectedItem.ToString()) &&
-                    string.IsNullOrEmpty(ChkStatus.SelectedItem.ToString())
-                    )
-                    Categorys_Load(sender, e);
+                BtnUpdate.Text = "Editar";
 
-                _client = new HttpClient();
-                HttpResponseMessage result;
-
-                if (string.IsNullOrEmpty(TxtCatName.Text))
-                    result = _client.GetAsync($"{baseUrl}/Category/ListWithFilter?MenuType={ChkMenuType.SelectedIndex}&Status={ChkStatus.SelectedIndex}").Result;
-                else
-                    result = _client.GetAsync($"{baseUrl}/Category/ListWithFilter?MenuType={ChkMenuType.SelectedIndex}&Status={ChkStatus.SelectedIndex}&Name={TxtCatName.Text}").Result;
-
-                var response = JsonConvert.DeserializeObject<MessageResponse<List<Category>>>(result.Content.ReadAsStringAsync().Result);
-
-                if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                //Caso o campo nome esteja desabilitado provavelmente todos vão estar. Habilitar
+                if (!TxtCatName.Enabled)
                 {
-                    var categorys = response.Entity;
+                    MessageBox.Show("Habilitando todos os campos de pesquisa!");
+                    TxtCatName.Enabled = true;
+                    ChkMenuType.Enabled = true;
+                    ChkStatus.Enabled = true;
+                    BtnUploadImageCat.Enabled = true;
+                }
+                else
+                {
+                    if (
+                        string.IsNullOrEmpty(TxtCatName.Text) &&
+                        string.IsNullOrEmpty(ChkMenuType.SelectedItem.ToString()) &&
+                        string.IsNullOrEmpty(ChkStatus.SelectedItem.ToString())
+                        )
+                        Categorys_Load(sender, e);
 
-                    if (categorys?.Count > 0)
+                    _client = new HttpClient();
+                    HttpResponseMessage result;
+
+                    if (string.IsNullOrEmpty(TxtCatName.Text))
+                        result = _client.GetAsync($"{baseUrl}/Category/ListWithFilter?MenuType={ChkMenuType.SelectedIndex}&Status={ChkStatus.SelectedIndex}").Result;
+                    else
+                        result = _client.GetAsync($"{baseUrl}/Category/ListWithFilter?MenuType={ChkMenuType.SelectedIndex}&Status={ChkStatus.SelectedIndex}&Name={TxtCatName.Text}").Result;
+
+                    var response = JsonConvert.DeserializeObject<MessageResponse<List<Category>>>(result.Content.ReadAsStringAsync().Result);
+
+                    if (result.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        //Clear list before add new itens.
-                        ListCategorys.Items.Clear();
-                        foreach (var i in categorys)
+                        var categorys = response.Entity;
+
+                        if (categorys?.Count > 0)
                         {
-                            //Passar como parâmetro o ID da categoria
-                            string[] rows = { i.Id.ToString(), i.Name, i.MenuType.ToString(), i.Status.ToString(), Encoding.ASCII.GetString(i.ImageContent) };
-                            ListCategorys.Items.Add(new ListViewItem(rows));
+                            //Clear list before add new itens.
+                            ListCategorys.Items.Clear();
+                            foreach (var i in categorys)
+                            {
+                                //Passar como parâmetro o ID da categoria
+                                string[] rows = { i.Id.ToString(), i.Name, i.MenuType.ToString(), i.Status.ToString(), Encoding.ASCII.GetString(i.ImageContent) };
+                                ListCategorys.Items.Add(new ListViewItem(rows));
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Nenhuma categoria encontrada de acordo com os filtros!");
+                            Categorys_Load(sender, e);
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show("Nenhuma categoria encontrada de acordo com os filtros!");
-                        Categorys_Load(sender, e);
-                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao pesquisar uma categoria.Exception: {ex.Message} StackTrace: {ex.StackTrace}");
             }
         }
 
@@ -443,38 +492,72 @@ namespace RestorantiApplication.Views
                         imgBytes = memoryStream.ToArray();
                         PbCategory.Image = Image.FromStream(memoryStream);
                     }
-
-                    ////Chamar a rota API de register de usuários.
-                    //_client = new HttpClient();
-
-
-                    //var category = new Category
-                    //{
-                    //    Name = TxtCatName.Text,
-                    //    ImageContent = imgBytes,
-                    //    MenuType = (EMenuType)Convert.ToInt32(ChkMenuType.SelectedItem),
-                    //    Status = (ECategoryStatus)Convert.ToInt32(ChkStatus.SelectedItem),
-                    //    CreationDate = DateTime.Now,
-                    //    CreationUserId = UserLogged.UserId
-                    //};
-
-                    //var request = JsonConvert.SerializeObject(category);
-                    //var contentString = new StringContent(request, Encoding.UTF8, "application/json");
-                    //contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-                    //HttpResponseMessage result = _client.PostAsync($"{baseUrl}/Category", contentString).Result;
-
-                    //if (result.StatusCode == System.Net.HttpStatusCode.OK)
-                    //{
-                    //    Categorys_Load(sender, e);
-                    //}
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Logger.Write($"Erro ao realizar o upload de uma imagem de categoria .Exception: {ex.Message} StackTrace: {ex.StackTrace}");
             }
         }
+
+        /// <summary>
+        /// Botão para fazer o download de imagens de categorias.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnSaveImage_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Deseja realizar o download da imagem?", "Download", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    var path = @"C:\\Restoranti\\Imagens\\";
+                    MemoryStream ms = new MemoryStream();
+                    using (var myBitmap = new Bitmap(PbCategory.Image))
+                    {
+                        myBitmap.Save(ms, ImageFormat.Jpeg);
+                    }
+
+                    if (File.Exists(path + TxtCatName.Text + ".jpg"))
+                    {
+                        var folderName = path.Replace(@"\\", "/");
+                        folderName = folderName.Substring(0, folderName.Length - 1);
+                        if (MessageBox.Show($"Existe uma imagem com o nome {TxtCatName.Text} salvo em {folderName}. Você deseja substituir?", "ATENÇÃO", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            File.WriteAllBytes(@$"C:\\Restoranti\\Imagens\\{TxtCatName.Text}.jpg", ms.ToArray());
+                    }
+                    else
+                        File.WriteAllBytes(@$"C:\\Restoranti\\Imagens\\{TxtCatName.Text}.jpg", ms.ToArray());
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao realizar o download da imagem da categoria {TxtCatName.Text}.Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+            }
+
+        }
+
+        /// <summary>
+        /// Método para converter a imaem em bytes[]
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns></returns>
+        private byte[] ImageForBytesArray(Image image)
+        {
+            try
+            {
+                using (var myBitmap = new Bitmap(image))
+                {
+                    MemoryStream ms = new MemoryStream();
+                    myBitmap.Save(ms, ImageFormat.Jpeg);
+                    return ms.ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao tentar converter a imagem em bytes.Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+                return null;
+            }
+        }
+
     }
 }

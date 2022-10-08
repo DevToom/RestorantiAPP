@@ -116,7 +116,7 @@ namespace RestorantiApplication.Views
             }
             catch (Exception ex)
             {
-
+                Logger.Write($"Erro ao tentar fazer login. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
             }
 
         }
