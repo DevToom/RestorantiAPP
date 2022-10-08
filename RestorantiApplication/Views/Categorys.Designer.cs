@@ -37,10 +37,11 @@
             this.StatusHeader = new System.Windows.Forms.ColumnHeader();
             this.ImageHeader = new System.Windows.Forms.ColumnHeader();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.BtnSaveImage = new System.Windows.Forms.Button();
+            this.PanelImageBorder = new System.Windows.Forms.Panel();
             this.PbCategory = new System.Windows.Forms.PictureBox();
             this.BtnUploadImageCat = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
+            this.LblImagem = new System.Windows.Forms.Label();
             this.ChkStatus = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.TxtCatName = new System.Windows.Forms.TextBox();
@@ -55,11 +56,10 @@
             this.lblFormName = new System.Windows.Forms.Label();
             this.lblIdCategory = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.BtnSaveImage = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel5.SuspendLayout();
+            this.PanelImageBorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbCategory)).BeginInit();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -97,7 +97,7 @@
             this.MenuTypeHeader,
             this.StatusHeader,
             this.ImageHeader});
-            this.ListCategorys.Font = new System.Drawing.Font("Aleo", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ListCategorys.Font = new System.Drawing.Font("Aleo", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ListCategorys.Location = new System.Drawing.Point(10, 6);
             this.ListCategorys.MultiSelect = false;
             this.ListCategorys.Name = "ListCategorys";
@@ -110,21 +110,22 @@
             // IdHeader
             // 
             this.IdHeader.Text = "Id";
+            this.IdHeader.Width = 100;
             // 
             // NameHeader
             // 
             this.NameHeader.Text = "Nome";
-            this.NameHeader.Width = 350;
+            this.NameHeader.Width = 400;
             // 
             // MenuTypeHeader
             // 
             this.MenuTypeHeader.Text = "Tipo de cardápio";
-            this.MenuTypeHeader.Width = 200;
+            this.MenuTypeHeader.Width = 300;
             // 
             // StatusHeader
             // 
             this.StatusHeader.Text = "Status";
-            this.StatusHeader.Width = 200;
+            this.StatusHeader.Width = 300;
             // 
             // ImageHeader
             // 
@@ -135,9 +136,9 @@
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
             this.panel3.Controls.Add(this.BtnSaveImage);
-            this.panel3.Controls.Add(this.panel5);
+            this.panel3.Controls.Add(this.PanelImageBorder);
             this.panel3.Controls.Add(this.BtnUploadImageCat);
-            this.panel3.Controls.Add(this.label4);
+            this.panel3.Controls.Add(this.LblImagem);
             this.panel3.Controls.Add(this.ChkStatus);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.TxtCatName);
@@ -154,14 +155,25 @@
             this.panel3.Size = new System.Drawing.Size(1280, 456);
             this.panel3.TabIndex = 2;
             // 
-            // panel5
+            // BtnSaveImage
             // 
-            this.panel5.BackColor = System.Drawing.Color.White;
-            this.panel5.Controls.Add(this.PbCategory);
-            this.panel5.Location = new System.Drawing.Point(12, 88);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(310, 310);
-            this.panel5.TabIndex = 13;
+            this.BtnSaveImage.Font = new System.Drawing.Font("Aleo", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnSaveImage.Location = new System.Drawing.Point(328, 375);
+            this.BtnSaveImage.Name = "BtnSaveImage";
+            this.BtnSaveImage.Size = new System.Drawing.Size(108, 23);
+            this.BtnSaveImage.TabIndex = 14;
+            this.BtnSaveImage.Text = "Salvar imagem";
+            this.BtnSaveImage.UseVisualStyleBackColor = true;
+            this.BtnSaveImage.Click += new System.EventHandler(this.BtnSaveImage_Click);
+            // 
+            // PanelImageBorder
+            // 
+            this.PanelImageBorder.BackColor = System.Drawing.Color.White;
+            this.PanelImageBorder.Controls.Add(this.PbCategory);
+            this.PanelImageBorder.Location = new System.Drawing.Point(12, 88);
+            this.PanelImageBorder.Name = "PanelImageBorder";
+            this.PanelImageBorder.Size = new System.Drawing.Size(310, 310);
+            this.PanelImageBorder.TabIndex = 13;
             // 
             // PbCategory
             // 
@@ -188,16 +200,16 @@
             this.BtnUploadImageCat.UseVisualStyleBackColor = true;
             this.BtnUploadImageCat.Click += new System.EventHandler(this.BtnUploadImageCat_Click);
             // 
-            // label4
+            // LblImagem
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(10, 61);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 19);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Imagem";
+            this.LblImagem.AutoSize = true;
+            this.LblImagem.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LblImagem.ForeColor = System.Drawing.Color.White;
+            this.LblImagem.Location = new System.Drawing.Point(10, 61);
+            this.LblImagem.Name = "LblImagem";
+            this.LblImagem.Size = new System.Drawing.Size(66, 19);
+            this.LblImagem.TabIndex = 10;
+            this.LblImagem.Text = "Imagem";
             // 
             // ChkStatus
             // 
@@ -311,7 +323,7 @@
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(121, 31);
             this.BtnAdd.TabIndex = 1;
-            this.BtnAdd.Text = "Adicionar";
+            this.BtnAdd.Text = "Novo";
             this.BtnAdd.UseVisualStyleBackColor = false;
             this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
@@ -364,17 +376,6 @@
             this.lblIdCategory.Size = new System.Drawing.Size(0, 19);
             this.lblIdCategory.TabIndex = 10;
             // 
-            // BtnSaveImage
-            // 
-            this.BtnSaveImage.Font = new System.Drawing.Font("Aleo", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnSaveImage.Location = new System.Drawing.Point(328, 375);
-            this.BtnSaveImage.Name = "BtnSaveImage";
-            this.BtnSaveImage.Size = new System.Drawing.Size(108, 23);
-            this.BtnSaveImage.TabIndex = 14;
-            this.BtnSaveImage.Text = "Salvar imagem";
-            this.BtnSaveImage.UseVisualStyleBackColor = true;
-            this.BtnSaveImage.Click += new System.EventHandler(this.BtnSaveImage_Click);
-            // 
             // Categorys
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -391,7 +392,7 @@
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.panel5.ResumeLayout(false);
+            this.PanelImageBorder.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PbCategory)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -422,12 +423,12 @@
         private Label label3;
         private Label lblIdCategory;
         private ColumnHeader MenuTypeHeader;
-        private Label label4;
+        private Label LblImagem;
         private PictureBox PbCategory;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Button BtnUploadImageCat;
         private ColumnHeader ImageHeader;
-        private Panel panel5;
+        private Panel PanelImageBorder;
         private Button BtnSaveImage;
     }
 }

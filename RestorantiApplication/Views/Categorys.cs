@@ -30,7 +30,6 @@ namespace RestorantiApplication.Views
         {
             try
             {
-                BtnSaveImage.Visible = false;
                 //VisibleAll = True
                 foreach (Control c in this.Controls)
                 {
@@ -77,7 +76,10 @@ namespace RestorantiApplication.Views
                     c.Visible = true;
                 }
 
-                panel5.Visible = false;
+                BtnUploadImageCat.Visible = false;
+                BtnSaveImage.Visible = false;
+                PanelImageBorder.Visible = false;
+                LblImagem.Visible = false;
             }
             catch (Exception ex)
             {
@@ -178,13 +180,14 @@ namespace RestorantiApplication.Views
         {
             try
             {
-                panel5.Visible = false;
+                PanelImageBorder.Visible = false;
                 BtnUpdate.Text = "Editar";
                 TxtCatName.Text = String.Empty;
                 ChkMenuType.Text = String.Empty;
                 ChkStatus.Text = String.Empty;
                 PbCategory.Image = null;
                 BtnSaveImage.Visible = false;
+                BtnAdd.Text = "Novo";
 
                 foreach (var i in ListCategorys.SelectedItems.Cast<ListViewItem>().ToList())
                 {
@@ -224,7 +227,7 @@ namespace RestorantiApplication.Views
                         BtnSaveImage.Visible = true;
 
 
-                    panel5.Visible = true;
+                    PanelImageBorder.Visible = true;
                 }
             }
             catch (Exception ex)
@@ -242,53 +245,24 @@ namespace RestorantiApplication.Views
         {
             try
             {
-                if (BtnUpdate.Text == "Salvar")
+                if (BtnAdd.Text == "Novo")
                 {
-                    if (MessageBox.Show("Você deseja continuar com a criação de uma nova categoria?", "Atenção!", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        //Adicionar um registro com base nas mesmas informações porém um novo usuário.
-                        _client = new HttpClient();
-                        byte[] imageContent = null;
+                    //Carregar a lista.
+                    Categorys_Load(sender, e);
 
-                        //Validar se fez o upload de uma imagem
-                        if (PbCategory.Image != null)
-                        {
-                            imageContent = ImageForBytesArray(PbCategory.Image);
-                        }
-
-                        var category = new Category
-                        {
-                            Name = TxtCatName.Text,
-                            ImageContent = imageContent,
-                            MenuType = (EMenuType)Enum.Parse(typeof(EMenuType), ChkMenuType.SelectedIndex.ToString(), true),
-                            Status = (ECategoryStatus)Enum.Parse(typeof(ECategoryStatus), ChkStatus.SelectedIndex.ToString(), true),
-                            CreationDate = DateTime.Now,
-                            CreationUserId = UserLogged.UserId
-                        };
-
-                        var request = JsonConvert.SerializeObject(category);
-                        var contentString = new StringContent(request, Encoding.UTF8, "application/json");
-                        contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-                        HttpResponseMessage result = _client.PostAsync($"{_baseUrl}/Category", contentString).Result;
-                        var response = JsonConvert.DeserializeObject<MessageResponse<Category>>(result.Content.ReadAsStringAsync().Result);
-                        if (result.StatusCode == System.Net.HttpStatusCode.OK)
-                        {
-                            MessageBox.Show(response.Message);
-
-                            //Após salvar o registro zerar todos os campos e atualizar a lista
-                            BtnUpdate.Text = "Editar";
-                            TxtCatName.Text = string.Empty;
-                            ChkMenuType.Text = string.Empty;
-                            ChkStatus.Text = string.Empty;
-                            PbCategory.Image = null;
-
-                            //Carregar a lista.
-                            Categorys_Load(sender, e);
-                        }
-                        else
-                            MessageBox.Show(response.Message);
-                    }
+                    BtnUpdate.Text = "Editar";
+                    TxtCatName.Text = string.Empty;
+                    TxtCatName.Enabled = true;
+                    ChkMenuType.Text = string.Empty;
+                    ChkMenuType.Enabled = true;
+                    ChkStatus.Text = string.Empty;
+                    ChkStatus.Enabled = true;
+                    PbCategory.Image = null;
+                    BtnAdd.Text = "Adicionar";
+                    BtnUploadImageCat.Visible = true;
+                    BtnUploadImageCat.Enabled = true;
+                    PanelImageBorder.Visible = true;
+                    LblImagem.Visible = true;
                 }
                 else
                 {
@@ -330,6 +304,7 @@ namespace RestorantiApplication.Views
                                 ChkMenuType.Text = string.Empty;
                                 ChkStatus.Text = string.Empty;
                                 PbCategory.Image = null;
+                                BtnAdd.Text = "Novo";
 
                                 //Carregar a lista.
                                 Categorys_Load(sender, e);
@@ -424,6 +399,10 @@ namespace RestorantiApplication.Views
                 }
                 else
                 {
+                    PanelImageBorder.Visible = false;
+                    BtnUploadImageCat.Visible = false;
+                    BtnSaveImage.Visible = false;
+                    BtnAdd.Text = "Novo";
                     if (
                         string.IsNullOrEmpty(TxtCatName.Text) &&
                         string.IsNullOrEmpty(ChkMenuType.SelectedItem.ToString()) &&
@@ -483,6 +462,7 @@ namespace RestorantiApplication.Views
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
+
                     byte[] imgBytes;
                     Bitmap bmp = new Bitmap(openFileDialog.FileName);
                     System.Drawing.Image image = bmp;
@@ -493,6 +473,9 @@ namespace RestorantiApplication.Views
                         imgBytes = memoryStream.ToArray();
                         PbCategory.Image = Image.FromStream(memoryStream);
                     }
+
+                    PanelImageBorder.Visible = true;
+                    BtnSaveImage.Visible = true;
                 }
             }
             catch (Exception ex)
