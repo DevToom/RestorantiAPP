@@ -34,4 +34,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <SourceGeneratorInput Remove="Models\Entities\Product.cs" />
+  </ItemGroup>
+
 </Project>

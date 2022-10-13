@@ -19,7 +19,7 @@ namespace RestorantiApplication.Views
     public partial class RecoveryPasswordStep1 : Form
     {
         private HttpClient _client;
-        private readonly static string baseUrl = ConfigurationManager.AppSettings["userInternal"].ToString();
+        private readonly static string baseUrl = ConfigurationManager.AppSettings["baseUrl"].ToString();
         public RecoveryPasswordStep1()
         {
             InitializeComponent();

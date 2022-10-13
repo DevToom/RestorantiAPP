@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RestorantiApplication.Generics.Actions;
 using RestorantiApplication.Generics.Logs;
 using RestorantiApplication.Models.Entities;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +15,7 @@ namespace RestorantiApplication.Views
     public partial class Categorys : Form
     {
         private HttpClient _client;
-        private readonly static string _baseUrl = ConfigurationManager.AppSettings["category"].ToString();
+        private readonly static string _baseUrl = ConfigurationManager.AppSettings["baseUrl"].ToString();
         private readonly static string _basePathImage = ConfigurationManager.AppSettings["basePathImage"].ToString();
         public Categorys()
         {
@@ -30,11 +31,17 @@ namespace RestorantiApplication.Views
         {
             try
             {
+                //SetAll Enable = false;
+                TxtCatName.Enabled = false;
+                ChkMenuType.Enabled = false;
+                ChkStatus.Enabled = false;
+
                 //VisibleAll = True
                 foreach (Control c in this.Controls)
                 {
                     c.Visible = false;
                 }
+
                 //Reset Combobox's
                 ChkStatus.Items.Clear();
                 ChkMenuType.Items.Clear();
@@ -126,7 +133,7 @@ namespace RestorantiApplication.Views
                     }
                     else
                     {
-                        MessageBox.Show("Selecione uma categoria para conseguir editar!");
+                        ActionsGenerics.ShowMessage("Selecione uma categoria para conseguir editar!");
                     }
                 }
                 else if (BtnUpdate.Text.Equals("Salvar"))
@@ -159,7 +166,7 @@ namespace RestorantiApplication.Views
                     var response = JsonConvert.DeserializeObject<MessageResponse<Category>>(result.Content.ReadAsStringAsync().Result);
                     if (result.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        MessageBox.Show(response.Message);
+                        ActionsGenerics.ShowMessage(response.Message);
                         BtnUpdate.Text = "Editar";
                         Categorys_Load(sender, e);
                     }
@@ -227,7 +234,6 @@ namespace RestorantiApplication.Views
                                 BtnUploadImageCat.Enabled = false;
                             }
                         }
-
                     }
 
                     if (PbCategory.Image != null)
@@ -276,7 +282,7 @@ namespace RestorantiApplication.Views
                 {
                     if (!String.IsNullOrEmpty(TxtCatName.Text) && !String.IsNullOrEmpty(ChkMenuType.Text) && !String.IsNullOrEmpty(ChkStatus.Text))
                     {
-                        if (MessageBox.Show("Você deseja adicionar o registro?", "Adicionar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        if (ActionsGenerics.ConfirmCustom("Você deseja adicionar o registro?"))
                         {
                             //Processo de adicionar no banco.
                             _client = new HttpClient();
@@ -316,15 +322,15 @@ namespace RestorantiApplication.Views
 
                                 //Carregar a lista.
                                 Categorys_Load(sender, e);
-                                MessageBox.Show(response.Message);
+                                ActionsGenerics.ShowMessage(response.Message);
                             }
                             else
-                                MessageBox.Show(response.Message);
+                                ActionsGenerics.ShowMessage(response.Message);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Preencha todos os campos!");
+                        ActionsGenerics.ShowMessage("Preencha todos os campos!");
                     }
                 }
             }
@@ -348,7 +354,7 @@ namespace RestorantiApplication.Views
                 var listOfAllSelected = ListCategorys.SelectedItems.Cast<ListViewItem>().ToList();
                 if (listOfAllSelected?.Count > 0)
                 {
-                    if (MessageBox.Show("Tem certeza que deseja excluir a categoria?", "Atenção!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (ActionsGenerics.ConfirmCustom("Tem certeza que deseja excluir a categoria?"))
                     {
 
                         foreach (var i in listOfAllSelected)
@@ -362,7 +368,7 @@ namespace RestorantiApplication.Views
                         var response = JsonConvert.DeserializeObject<MessageResponse<Category>>(result.Content.ReadAsStringAsync().Result);
                         if (result.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            MessageBox.Show(response.Message);
+                            ActionsGenerics.ShowMessage(response.Message);
                             Categorys_Load(sender, e);
 
                             TxtCatName.Enabled = true;
@@ -371,12 +377,12 @@ namespace RestorantiApplication.Views
                             BtnUploadImageCat.Enabled = true;
                         }
                         else
-                            MessageBox.Show(response.Message);
+                            ActionsGenerics.ShowMessage(response.Message);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Selecione uma categoria para conseguir remover!");
+                    ActionsGenerics.ShowMessage("Selecione uma categoria para conseguir remover!");
                 }
             }
             catch (Exception ex)
@@ -399,7 +405,7 @@ namespace RestorantiApplication.Views
                 //Caso o campo nome esteja desabilitado provavelmente todos vão estar. Habilitar
                 if (!TxtCatName.Enabled)
                 {
-                    MessageBox.Show("Habilitando todos os campos de pesquisa!");
+                    ActionsGenerics.ShowMessage("Habilitando todos os campos de pesquisa!");
                     TxtCatName.Enabled = true;
                     ChkMenuType.Enabled = true;
                     ChkStatus.Enabled = true;
@@ -439,13 +445,13 @@ namespace RestorantiApplication.Views
                             foreach (var i in categorys)
                             {
                                 //Passar como parâmetro o ID da categoria
-                                string[] rows = { i.Id.ToString(), i.Name, i.MenuType.ToString(), i.Status.ToString(), Encoding.ASCII.GetString(i.ImageContent) };
+                                string[] rows = { i.Id.ToString(), i.Name, i.MenuType.ToString(), i.Status.ToString(), i.ImageContent != null ? Encoding.ASCII.GetString(i.ImageContent) : null };
                                 ListCategorys.Items.Add(new ListViewItem(rows));
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Nenhuma categoria encontrada de acordo com os filtros!");
+                            ActionsGenerics.ShowMessage("Nenhuma categoria encontrada de acordo com os filtros!");
                             Categorys_Load(sender, e);
                         }
                     }
@@ -501,7 +507,7 @@ namespace RestorantiApplication.Views
         {
             try
             {
-                if (MessageBox.Show("Deseja realizar o download da imagem?", "Download", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (ActionsGenerics.ConfirmCustom("Deseja realizar o download da imagem?"))
                 {
                     MemoryStream ms = new MemoryStream();
                     using (var myBitmap = new Bitmap(PbCategory.Image))
@@ -513,7 +519,7 @@ namespace RestorantiApplication.Views
                     {
                         var folderName = _basePathImage.Replace(@"\\", "/");
                         folderName = folderName.Substring(0, folderName.Length - 1);
-                        if (MessageBox.Show($"Existe uma imagem com o nome {TxtCatName.Text} salvo em {folderName}. Você deseja substituir?", "ATENÇÃO", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        if (ActionsGenerics.ConfirmCustom($"Existe uma imagem com o nome {TxtCatName.Text} salvo em {folderName}. Você deseja substituir?"))
                             File.WriteAllBytes(@$"C:\\Restoranti\\Imagens\\{TxtCatName.Text}.jpg", ms.ToArray());
                     }
                     else

@@ -59,6 +59,24 @@ namespace RestorantiApplication.Generics.Actions
             }
         }
 
-
+        public static bool ShowMessage(string Message)
+        {
+            try
+            {
+                using (var form = new MessageModal(Message))
+                {
+                    form.ShowDialog();
+                    if (form.DialogResult == DialogResult.OK)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro técnico ao encerrar pressionar OK em MessageModal. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+                return false;
+            }
+        }
     }
 }

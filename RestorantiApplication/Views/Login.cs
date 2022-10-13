@@ -22,7 +22,7 @@ namespace RestorantiApplication.Views
     {
         private readonly EAcessType _acessType;
         private HttpClient _client;
-        private readonly static string baseUrl = ConfigurationManager.AppSettings["userInternal"].ToString();
+        private readonly static string baseUrl = ConfigurationManager.AppSettings["baseUrl"].ToString();
         public Login(EAcessType acessType)
         {
             this._acessType = acessType;

@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.PanelFoot = new System.Windows.Forms.Panel();
             this.ListCategorys = new System.Windows.Forms.ListView();
             this.IdHeader = new System.Windows.Forms.ColumnHeader();
             this.NameHeader = new System.Windows.Forms.ColumnHeader();
             this.MenuTypeHeader = new System.Windows.Forms.ColumnHeader();
             this.StatusHeader = new System.Windows.Forms.ColumnHeader();
             this.ImageHeader = new System.Windows.Forms.ColumnHeader();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.PanelBody = new System.Windows.Forms.Panel();
             this.BtnSaveImage = new System.Windows.Forms.Button();
             this.PanelImageBorder = new System.Windows.Forms.Panel();
             this.PbCategory = new System.Windows.Forms.PictureBox();
@@ -52,39 +52,39 @@
             this.BtnRemove = new System.Windows.Forms.Button();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.PanelHeader = new System.Windows.Forms.Panel();
             this.lblFormName = new System.Windows.Forms.Label();
             this.lblIdCategory = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.PanelFoot.SuspendLayout();
+            this.PanelBody.SuspendLayout();
             this.PanelImageBorder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PbCategory)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.PanelHeader.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.PanelFoot);
+            this.panel1.Controls.Add(this.PanelBody);
+            this.panel1.Controls.Add(this.PanelHeader);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1280, 720);
             this.panel1.TabIndex = 0;
             // 
-            // panel4
+            // PanelFoot
             // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.panel4.Controls.Add(this.ListCategorys);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 491);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1280, 229);
-            this.panel4.TabIndex = 3;
+            this.PanelFoot.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
+            this.PanelFoot.Controls.Add(this.ListCategorys);
+            this.PanelFoot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelFoot.Location = new System.Drawing.Point(0, 491);
+            this.PanelFoot.Name = "PanelFoot";
+            this.PanelFoot.Size = new System.Drawing.Size(1280, 229);
+            this.PanelFoot.TabIndex = 3;
             // 
             // ListCategorys
             // 
@@ -132,28 +132,28 @@
             this.ImageHeader.Text = "Imagem";
             this.ImageHeader.Width = 0;
             // 
-            // panel3
+            // PanelBody
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.panel3.Controls.Add(this.BtnSaveImage);
-            this.panel3.Controls.Add(this.PanelImageBorder);
-            this.panel3.Controls.Add(this.BtnUploadImageCat);
-            this.panel3.Controls.Add(this.LblImagem);
-            this.panel3.Controls.Add(this.ChkStatus);
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Controls.Add(this.TxtCatName);
-            this.panel3.Controls.Add(this.ChkMenuType);
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.BtnUpdate);
-            this.panel3.Controls.Add(this.BtnRemove);
-            this.panel3.Controls.Add(this.BtnAdd);
-            this.panel3.Controls.Add(this.btnSearch);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 35);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1280, 456);
-            this.panel3.TabIndex = 2;
+            this.PanelBody.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
+            this.PanelBody.Controls.Add(this.BtnSaveImage);
+            this.PanelBody.Controls.Add(this.PanelImageBorder);
+            this.PanelBody.Controls.Add(this.BtnUploadImageCat);
+            this.PanelBody.Controls.Add(this.LblImagem);
+            this.PanelBody.Controls.Add(this.ChkStatus);
+            this.PanelBody.Controls.Add(this.label3);
+            this.PanelBody.Controls.Add(this.TxtCatName);
+            this.PanelBody.Controls.Add(this.ChkMenuType);
+            this.PanelBody.Controls.Add(this.label2);
+            this.PanelBody.Controls.Add(this.label1);
+            this.PanelBody.Controls.Add(this.BtnUpdate);
+            this.PanelBody.Controls.Add(this.BtnRemove);
+            this.PanelBody.Controls.Add(this.BtnAdd);
+            this.PanelBody.Controls.Add(this.btnSearch);
+            this.PanelBody.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PanelBody.Location = new System.Drawing.Point(0, 35);
+            this.PanelBody.Name = "PanelBody";
+            this.PanelBody.Size = new System.Drawing.Size(1280, 456);
+            this.PanelBody.TabIndex = 2;
             // 
             // BtnSaveImage
             // 
@@ -221,6 +221,7 @@
             this.ChkStatus.Name = "ChkStatus";
             this.ChkStatus.Size = new System.Drawing.Size(175, 31);
             this.ChkStatus.TabIndex = 9;
+            this.ChkStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             // 
             // label3
             // 
@@ -255,6 +256,7 @@
             this.ChkMenuType.Name = "ChkMenuType";
             this.ChkMenuType.Size = new System.Drawing.Size(158, 31);
             this.ChkMenuType.TabIndex = 6;
+            this.ChkMenuType.DropDownStyle = ComboBoxStyle.DropDownList;
             // 
             // label2
             // 
@@ -344,16 +346,16 @@
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // panel2
+            // PanelHeader
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.panel2.Controls.Add(this.lblFormName);
-            this.panel2.Controls.Add(this.lblIdCategory);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1280, 35);
-            this.panel2.TabIndex = 1;
+            this.PanelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
+            this.PanelHeader.Controls.Add(this.lblFormName);
+            this.PanelHeader.Controls.Add(this.lblIdCategory);
+            this.PanelHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PanelHeader.Location = new System.Drawing.Point(0, 0);
+            this.PanelHeader.Name = "PanelHeader";
+            this.PanelHeader.Size = new System.Drawing.Size(1280, 35);
+            this.PanelHeader.TabIndex = 1;
             // 
             // lblFormName
             // 
@@ -389,13 +391,13 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Categorys_Load);
             this.panel1.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.PanelFoot.ResumeLayout(false);
+            this.PanelBody.ResumeLayout(false);
+            this.PanelBody.PerformLayout();
             this.PanelImageBorder.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PbCategory)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.PanelHeader.ResumeLayout(false);
+            this.PanelHeader.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -404,14 +406,14 @@
 
         private Panel panel1;
         private Label lblFormName;
-        private Panel panel4;
-        private Panel panel3;
+        private Panel PanelFoot;
+        private Panel PanelBody;
         private Label label1;
         private Button BtnUpdate;
         private Button BtnRemove;
         private Button BtnAdd;
         private Button btnSearch;
-        private Panel panel2;
+        private Panel PanelHeader;
         private TextBox TxtCatName;
         private ComboBox ChkMenuType;
         private Label label2;

@@ -73,7 +73,7 @@ namespace RestorantiApplication.Views
                         {
                             //Chamar a rota API de register de usuários.
                             _client = new HttpClient();
-                            baseUrl = ConfigurationManager.AppSettings["userInternal"].ToString();
+                            baseUrl = ConfigurationManager.AppSettings["baseUrl"].ToString();
 
                             var userInternal = new UserInternal
                             {

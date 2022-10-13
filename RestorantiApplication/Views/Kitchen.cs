@@ -19,7 +19,7 @@ namespace RestorantiApplication.Views
     public partial class Kitchen : Form
     {
         private HttpClient _client = new HttpClient();
-        private readonly static string baseUrl = ConfigurationManager.AppSettings["order"].ToString();
+        private readonly static string baseUrl = ConfigurationManager.AppSettings["baseUrl"].ToString();
         public Kitchen()
         {
             InitializeComponent();
@@ -41,7 +41,7 @@ namespace RestorantiApplication.Views
                         orders.Add(new Order
                         {
                             HasObservation = false,
-                            Itens = new List<Product>(),
+                            Itens = new List<Itens>(),
                             OrderId = i,
                             TableNumber = i,
                             UserId = 10

@@ -11,12 +11,12 @@ namespace RestorantiApplication.Models.Entities
         public int OrderId { get; set; }
         public int TableNumber { get; set; }
         public int UserId { get; set; }
-        public List<Product> Itens { get; set; }
+        public List<Itens> Itens { get; set; }
         public bool HasObservation { get; set; }
         public string Observation { get; set; }
     }
 
-    public class Product
+    public class Itens
     {
         public int ProductId { get; set; }
         public int CategoryId { get; set; }

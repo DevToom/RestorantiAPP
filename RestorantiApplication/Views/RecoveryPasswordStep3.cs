@@ -18,7 +18,7 @@ namespace RestorantiApplication.Views
     public partial class RecoveryPasswordStep3 : Form
     {
         private HttpClient _client;
-        private readonly static string baseUrl = ConfigurationManager.AppSettings["userInternal"].ToString();
+        private readonly static string baseUrl = ConfigurationManager.AppSettings["baseUrl"].ToString();
         private UserValidateRecoveryPassword _userValidateRecoveryPassword;
         public RecoveryPasswordStep3(UserValidateRecoveryPassword userValidateRecoveryPassword)
         {
