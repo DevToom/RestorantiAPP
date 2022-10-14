@@ -37,9 +37,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.BtnLogout = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.BtnExit = new System.Windows.Forms.Button();
+            this.BtnMinimize = new System.Windows.Forms.Button();
             this.BtnMinimize1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -129,9 +128,8 @@
             // 
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
             this.panel6.Controls.Add(this.BtnLogout);
-            this.panel6.Controls.Add(this.button2);
-            this.panel6.Controls.Add(this.button1);
             this.panel6.Controls.Add(this.BtnExit);
+            this.panel6.Controls.Add(this.BtnMinimize);
             this.panel6.Controls.Add(this.BtnMinimize1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 0);
@@ -150,42 +148,7 @@
             this.BtnLogout.Size = new System.Drawing.Size(33, 38);
             this.BtnLogout.TabIndex = 9;
             this.BtnLogout.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Aleo", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.ForeColor = System.Drawing.Color.Transparent;
-            this.button2.Location = new System.Drawing.Point(1233, 6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(35, 28);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "x";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.BackgroundImage = global::RestorantiApplication.Properties.Resources.minimize61;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.Transparent;
-            this.button1.Location = new System.Drawing.Point(1191, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(27, 22);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "-";
-            this.button1.UseVisualStyleBackColor = true;
+            this.BtnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
             // 
             // BtnExit
             // 
@@ -195,12 +158,34 @@
             this.BtnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnExit.Font = new System.Drawing.Font("Aleo", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BtnExit.ForeColor = System.Drawing.Color.Transparent;
-            this.BtnExit.Location = new System.Drawing.Point(2109, -16);
+            this.BtnExit.Location = new System.Drawing.Point(1233, 6);
             this.BtnExit.Name = "BtnExit";
             this.BtnExit.Size = new System.Drawing.Size(35, 28);
-            this.BtnExit.TabIndex = 5;
+            this.BtnExit.TabIndex = 8;
             this.BtnExit.Text = "x";
             this.BtnExit.UseVisualStyleBackColor = true;
+            this.BtnExit.Click += new System.EventHandler(this.BtnExit_Click);
+            // 
+            // BtnMinimize
+            // 
+            this.BtnMinimize.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.BtnMinimize.BackColor = System.Drawing.Color.Transparent;
+            this.BtnMinimize.BackgroundImage = global::RestorantiApplication.Properties.Resources.minimize61;
+            this.BtnMinimize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BtnMinimize.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.BtnMinimize.FlatAppearance.BorderSize = 0;
+            this.BtnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BtnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BtnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnMinimize.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BtnMinimize.ForeColor = System.Drawing.Color.Transparent;
+            this.BtnMinimize.Location = new System.Drawing.Point(1191, 12);
+            this.BtnMinimize.Name = "BtnMinimize";
+            this.BtnMinimize.Size = new System.Drawing.Size(27, 22);
+            this.BtnMinimize.TabIndex = 7;
+            this.BtnMinimize.Text = "-";
+            this.BtnMinimize.UseVisualStyleBackColor = true;
+            this.BtnMinimize.Click += new System.EventHandler(this.BtnMinimize_Click);
             // 
             // BtnMinimize1
             // 
@@ -251,10 +236,9 @@
         private Label label3;
         private Panel panel1;
         private Panel panel6;
-        private Button BtnExit;
         private Button BtnMinimize1;
-        private Button button1;
-        private Button button2;
+        private Button BtnMinimize;
+        private Button BtnExit;
         private Button BtnLogout;
     }
 }

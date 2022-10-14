@@ -4,37 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestorantiApplication.Models.Entities
+namespace RestorantiApplication.Models.Entities.VM
 {
-    public class Order
+    /// <summary>
+    /// Pedido formatado
+    /// </summary>
+    public class OrderResponseVM
     {
-        public int Id { get; set; }
-
-        /// <summary>
-        /// Número do pedido
-        /// </summary>
         public string OrderNumber { get; set; }
-
-        /// <summary>
-        /// Número da mesa
-        /// </summary>
         public int TableNumber { get; set; }
-
-        /// <summary>
-        /// Id do cliente que realizou o pedido, caso tenha.
-        /// </summary>
         public int? UserId { get; set; }
-
-        /// <summary>
-        /// Tipo de pedido
-        /// </summary>
         public EOrderType Type { get; set; }
-
-        /// <summary>
-        /// Status do Pedido
-        /// </summary>
         public EStatus Status { get; set; }
-
+        public List<ProductVM> Products { get; set; }
+        public bool hasObservation { get; set; }
+        public decimal? Total { get; set; }
+    }
+    public class ProductVM
+    {
         /// <summary>
         /// Id do Produto
         /// </summary>
@@ -44,9 +31,8 @@ namespace RestorantiApplication.Models.Entities
         /// Nome do Produto
         /// </summary>
         public string ProductName { get; set; }
-
         /// <summary>
-        /// Quantidade escolhida
+        /// Quantidade do produto selecionado
         /// </summary>
         public int Quantity { get; set; }
 
@@ -64,25 +50,6 @@ namespace RestorantiApplication.Models.Entities
         /// Caso tenha observação descrever aqui, por produto
         /// </summary>
         public string Observation { get; set; }
-
-        /// <summary>
-        /// Valor total do pedido
-        /// </summary>
-        public decimal? Total { get; set; }
     }
-
-    public enum EOrderType
-    {
-        LaCarte = 0,
-        Rodizio = 10
-    }
-
-    public enum EStatus
-    {
-        A_PREPARAR = 0,
-        PREPARANDO = 1,
-        PREPARADO = 2
-    }
-
 
 }

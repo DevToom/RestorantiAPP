@@ -81,7 +81,7 @@ namespace RestorantiApplication.Views
                 {
                     //Chamar a rota API de register de usuários.
                     _client = new HttpClient();
-                    
+
 
                     var userInternal = new UserInternal
                     {
@@ -101,14 +101,26 @@ namespace RestorantiApplication.Views
                         var userResponse = JsonConvert.DeserializeObject<UserInternal>(result.Content.ReadAsStringAsync().Result);
                         UserLogged.Name = string.IsNullOrEmpty(userResponse.Name) ? "" : userResponse.Name;
                         UserLogged.UserId = userResponse.Id != 0 ? userResponse.Id : 0;
+                        if (_acessType == EAcessType.Cashier)
+                        {
+                            //Inicialização de um novo thread para a aplicação não fechar quando der um close().
+                            var th = new Thread(() => Application.Run(new MainPage()));
+                            th.SetApartmentState(ApartmentState.STA);
+                            th.Start();
 
-                        //Inicialização de um novo thread para a aplicação não fechar quando der um close().
-                        var th = new Thread(() => Application.Run(new MainPage()));
-                        th.SetApartmentState(ApartmentState.STA);
-                        th.Start();
+                            //Fechar tela inicial de carregamento
+                            this.Close();
+                        }
+                        else
+                        {
+                            //Inicialização de um novo thread para a aplicação não fechar quando der um close().
+                            var th = new Thread(() => Application.Run(new Kitchen()));
+                            th.SetApartmentState(ApartmentState.STA);
+                            th.Start();
 
-                        //Fechar tela inicial de carregamento
-                        this.Close();
+                            //Fechar tela inicial de carregamento
+                            this.Close();
+                        }
                     }
                     else
                         MessageBox.Show(result.Content.ReadAsStringAsync().Result);

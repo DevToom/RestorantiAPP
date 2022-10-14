@@ -2,6 +2,9 @@
 using RestorantiApplication.Generics.Actions;
 using RestorantiApplication.Generics.Logs;
 using RestorantiApplication.Models.Entities;
+using RestorantiApplication.Models.Entities.Constants;
+using RestorantiApplication.Models.Entities.VM;
+using RestorantiApplication.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +23,7 @@ namespace RestorantiApplication.Views
     {
         private HttpClient _client = new HttpClient();
         private readonly static string baseUrl = ConfigurationManager.AppSettings["baseUrl"].ToString();
+        private static List<OrderResponseVM> _orders;
         public Kitchen()
         {
             InitializeComponent();
@@ -29,37 +33,28 @@ namespace RestorantiApplication.Views
         {
             try
             {
-                //HttpResponseMessage result = _client.GetAsync($"{baseUrl}/Order/GetListOrder").Result;//_client.PostAsync($"{baseUrl}/UserInternal/Login", contentString).Result;
+                HttpResponseMessage result = _client.GetAsync($"{baseUrl}/Order/GetListOrder").Result;//_client.PostAsync($"{baseUrl}/UserInternal/Login", contentString).Result;
 
-                //if (result.StatusCode == System.Net.HttpStatusCode.OK)
-                if (true == true)
+                if (result.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    //var orders = JsonConvert.DeserializeObject<List<Order>>(await result.Content.ReadAsStringAsync());
-                    List<Order> orders = new List<Order>();
-                    for (int i = 1; i < 10; i++)
-                    {
-                        orders.Add(new Order
-                        {
-                            HasObservation = false,
-                            Itens = new List<Itens>(),
-                            OrderId = i,
-                            TableNumber = i,
-                            UserId = 10
-                    });
-                    }
+                    var orders = JsonConvert.DeserializeObject<List<OrderResponseVM>>(await result.Content.ReadAsStringAsync());
+                    _orders = orders;
 
                     foreach (var i in orders)
                     {
                         Label lblTitleOrder = AddTitleOrder(i);
                         Label lblDescOrder = AddDescOrder(i);
-                        Button btnDetails = AddBtnObservation(i);
+                        Button btnDetails = new Button();
+                        if (i.hasObservation)
+                            btnDetails = AddBtnObservation(i);
                         Button btnPrepare = AddBtnPrepare(i);
                         GroupBox gpBox = AddGroupBox(i);
 
                         flowPrepare.Controls.Add(gpBox);
                         gpBox.Controls.Add(lblTitleOrder);
                         gpBox.Controls.Add(lblDescOrder);
-                        gpBox.Controls.Add(btnDetails);
+                        if (i.hasObservation)
+                            gpBox.Controls.Add(btnDetails);
                         gpBox.Controls.Add(btnPrepare);
                         btnPrepare.Click += new System.EventHandler(this.ButtonPreparing_Click);
                     }
@@ -92,13 +87,16 @@ namespace RestorantiApplication.Views
                     {
                         foreach (Button btn in control.Controls.OfType<Button>())
                         {
-                            if (btn.Name.Contains("_"))
+                            if (btn.Text != "Observação")
                             {
-                                btn.Text = "Finalizar";
-                                btn.Click += new System.EventHandler(this.ButtonPrepared_Click);
-                                groupBox = (GroupBox)control;
-                                hasPreparing = true;
-                                break;
+                                if (btn.Name.Contains("_"))
+                                {
+                                    btn.Text = "Finalizar";
+                                    btn.Click += new System.EventHandler(this.ButtonPrepared_Click);
+                                    groupBox = (GroupBox)control;
+                                    hasPreparing = true;
+                                    break;
+                                }
                             }
                         }
                         break;
@@ -149,31 +147,32 @@ namespace RestorantiApplication.Views
                 flowPrepared.Controls.Add(groupBox);
         }
 
-        private Label AddTitleOrder(Order order)
+        private Label AddTitleOrder(OrderResponseVM order)
         {
             Label lbl = new Label();
-            lbl.Name = $"lbl1_{order.OrderId}";
-            lbl.Text = $"Nº {order.OrderId}";
+            lbl.Name = $"lbl1_{order.OrderNumber}";
+            lbl.Text = $"Nº {order.OrderNumber}";
             lbl.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             lbl.ForeColor = Color.White;
             lbl.BackColor = Color.FromArgb(11, 7, 17);
-            lbl.TextAlign = ContentAlignment.MiddleCenter;
+            lbl.TextAlign = ContentAlignment.MiddleLeft;
             lbl.Margin = new Padding(5);
+            lbl.Size = new Size(140, 30);
 
             return lbl;
         }
 
-        private Label AddDescOrder(Order order)
+        private Label AddDescOrder(OrderResponseVM orders)
         {
 
             string OrderMessage = string.Empty;
 
-            order.Itens.ForEach(i =>
-                OrderMessage += @$"{i.Quantity}x {i.Name} {Environment.NewLine}"
+            orders.Products.ForEach(i =>
+                OrderMessage += @$"{i.Quantity}x {i.ProductName} {Environment.NewLine}"
             );
 
             Label lbl = new Label();
-            lbl.Name = $"lbl2_{order.OrderId}";
+            lbl.Name = $"lbl2_{orders.OrderNumber}";
             lbl.Text = OrderMessage;
             lbl.ForeColor = Color.Black;
             lbl.BackColor = Color.White;
@@ -186,10 +185,10 @@ namespace RestorantiApplication.Views
             return lbl;
         }
 
-        private Button AddBtnObservation(Order order)
+        private Button AddBtnObservation(OrderResponseVM order)
         {
             Button btn = new Button();
-            btn.Name = $"btn1_{order.OrderId}";
+            btn.Name = $"btn1_{order.OrderNumber}";
             btn.Text = "Observação";
             btn.Dock = DockStyle.Bottom;
             btn.ForeColor = Color.Black;
@@ -211,13 +210,36 @@ namespace RestorantiApplication.Views
 
         private void ButtonObservation_Click(object? sender, EventArgs e)
         {
-            //Mostrar a modal com a informação.
+            try
+            {
+                Button observation = (Button)sender;
+                string orderNumber = observation.Name.Substring(observation.Name.IndexOf("_"), observation.Name.Length - observation.Name.IndexOf("_"));
+                orderNumber = orderNumber.Substring(1);
+
+                var orders = _orders.Where(x => x.OrderNumber == orderNumber).FirstOrDefault();
+                string msgOrder = string.Empty;
+
+                foreach (var i in orders.Products)
+                {
+                    if (i.hasObservation)
+                    {
+                        msgOrder += @$"º{i.ProductName} => {i.Observation}{Environment.NewLine}";
+                    }
+                }
+
+                MessageBox.Show(@$"OBSERVAÇÕES DO PEDIDO: {Environment.NewLine} {msgOrder}");
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao encerrar a aplicação COZINHA. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+            }
         }
 
-        private Button AddBtnPrepare(Order order)
+        private Button AddBtnPrepare(OrderResponseVM order)
         {
             Button btn = new Button();
-            btn.Name = $"btn2_{order.OrderId}";
+            btn.Name = $"btn2_{order.OrderNumber}";
             btn.Text = "Preparar";
             btn.Dock = DockStyle.Bottom;
             btn.ForeColor = Color.White;
@@ -235,30 +257,104 @@ namespace RestorantiApplication.Views
             return btn;
         }
 
-        private GroupBox AddGroupBox(Order order)
+        private GroupBox AddGroupBox(OrderResponseVM order)
         {
             GroupBox gpBox = new GroupBox();
             gpBox.Location = new System.Drawing.Point(3, 3);
-            gpBox.Name = $"gb_{order.OrderId}";
+            gpBox.Name = $"gb_{order.OrderNumber}";
             gpBox.Size = new System.Drawing.Size(365, 150);
             gpBox.TabIndex = 0;
             gpBox.TabStop = false;
-            gpBox.Text = "GroupBoxAdd";
 
             return gpBox;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void BtnExit_Click(object sender, EventArgs e)
         {
             try
             {
-                if (ActionsGenerics.Exit())
-                    this.Close();
+                bool trustLogout = ValidateForExitAndLogout();
+
+                if (trustLogout)
+                {
+                    if (ActionsGenerics.Exit())
+                        this.Close();
+                }
+
             }
             catch (Exception ex)
             {
-                Logger.Write($"Erro ao encerrar a aplicação. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+                Logger.Write($"Erro ao encerrar a aplicação COZINHA. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
             }
+        }
+
+        private void BtnLogout_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                bool trustLogout = ValidateForExitAndLogout();
+
+                if (trustLogout)
+                {
+                    if (ActionsGenerics.ConfirmCustom(Constants.CONFIRM_MESSAGE_LOGOUT))
+                    {
+                        //Reset de usuário global
+                        UserLogged.Name = string.Empty;
+                        UserLogged.UserId = 0;
+
+                        //Inicialização de um novo thread para a aplicação não fechar quando der um close().
+                        var th = new Thread(() => Application.Run(new Login(EAcessType.Kitchen)));
+                        th.SetApartmentState(ApartmentState.STA);
+                        th.Start();
+
+                        //Fechar tela inicial de carregamento
+                        this.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao tentar deslogar da conta COZINHA. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+            }
+        }
+
+        private void BtnMinimize_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
+            catch (Exception ex)
+            {
+                Logger.Write($"Erro ao minimizar a aplicação COZINHA. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
+            }
+        }
+
+        public bool ValidateForExitAndLogout()
+        {
+            bool trustLogout = true;
+            foreach (Control control in flowPreparing.Controls)
+            {
+                if (control is GroupBox)
+                {
+                    ActionsGenerics.ShowMessage("Ainda existe pedido(s) sendo preparado(s). Finalize-os antes para prosseguir");
+                    return false;
+                }
+            }
+
+            if (trustLogout)
+            {
+                foreach (Control control in flowPrepared.Controls)
+                {
+                    if (control is GroupBox)
+                    {
+                        ActionsGenerics.ShowMessage("Ainda existe pedido(s) na fila de preparados. Finalize-os antes para prosseguir");
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }
