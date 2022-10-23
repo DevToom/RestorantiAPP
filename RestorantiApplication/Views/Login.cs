@@ -75,7 +75,7 @@ namespace RestorantiApplication.Views
                 //Validar se as credenciais foram digitadas...
                 if (string.IsNullOrEmpty(TxtUser.Text) || string.IsNullOrEmpty(TxtPassword.Text))
                 {
-                    MessageBox.Show("Preencha todos os campos!");
+                    ActionsGenerics.ShowMessage("Preencha todos os campos!");
                 }
                 else
                 {
@@ -123,7 +123,7 @@ namespace RestorantiApplication.Views
                         }
                     }
                     else
-                        MessageBox.Show(result.Content.ReadAsStringAsync().Result);
+                        ActionsGenerics.ShowMessage(result.Content.ReadAsStringAsync().Result);
                 }
             }
             catch (Exception ex)

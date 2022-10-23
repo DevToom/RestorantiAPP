@@ -65,7 +65,7 @@ namespace RestorantiApplication.Views
                 {
                     if (String.IsNullOrEmpty(TxtPassword.Text) || String.IsNullOrEmpty(TxtConfirmPassword.Text) || TxtPassword.Text != TxtConfirmPassword.Text)
                     {
-                        MessageBox.Show("Senhas não coincidente.", "Atenção");
+                        ActionsGenerics.ShowMessage("Senhas não coincidente.");
                     }
                     else
                     {
@@ -74,39 +74,50 @@ namespace RestorantiApplication.Views
                             //Chamar a rota API de register de usuários.
                             _client = new HttpClient();
                             baseUrl = ConfigurationManager.AppSettings["baseUrl"].ToString();
+                            bool trustCreate = false;
 
-                            var userInternal = new UserInternal
+                            using (var form = new PasswordAdministratorConfirm())
                             {
-                                Name = TxtName.Text,
-                                Phone = TxtPhone.Text,
-                                Email = TxtEmail.Text,
-                                Profile = (EProfile)ChkProfile.SelectedIndex,
-                                Username = TxtUser.Text,
-                                Password = TxtPassword.Text,
-                                ConfirmPassword = TxtConfirmPassword.Text
-                            };
-
-                            var request = JsonConvert.SerializeObject(userInternal);
-                            var contentString = new StringContent(request, Encoding.UTF8, "application/json");
-                            contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-                            HttpResponseMessage result = _client.PostAsync($"{baseUrl}/UserInternal/Create", contentString).Result;
-
-                            if (result.StatusCode == System.Net.HttpStatusCode.OK)
-                            {
-                                MessageBox.Show(result.Content.ReadAsStringAsync().Result);
-
-                                //Inicialização de um novo thread para a aplicação não fechar quando der um close().
-                                var th = new Thread(() => Application.Run(new Login(_acessType)));
-                                th.SetApartmentState(ApartmentState.STA);
-                                th.Start();
-
-                                //Fechar tela inicial de carregamento
-                                this.Close();
-
+                                form.ShowDialog();
+                                if (form.DialogResult == DialogResult.Yes)
+                                    trustCreate = true;
                             }
-                            else
-                                MessageBox.Show(result.Content.ReadAsStringAsync().Result);
+
+                            if (trustCreate)
+                            {
+                                var userInternal = new UserInternal
+                                {
+                                    Name = TxtName.Text,
+                                    Phone = TxtPhone.Text,
+                                    Email = TxtEmail.Text,
+                                    Profile = (EProfile)ChkProfile.SelectedIndex,
+                                    Username = TxtUser.Text,
+                                    Password = TxtPassword.Text,
+                                    ConfirmPassword = TxtConfirmPassword.Text
+                                };
+
+                                var request = JsonConvert.SerializeObject(userInternal);
+                                var contentString = new StringContent(request, Encoding.UTF8, "application/json");
+                                contentString.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                                HttpResponseMessage result = _client.PostAsync($"{baseUrl}/UserInternal/Create", contentString).Result;
+
+                                if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                                {
+                                    ActionsGenerics.ShowMessage(result.Content.ReadAsStringAsync().Result);
+
+                                    //Inicialização de um novo thread para a aplicação não fechar quando der um close().
+                                    var th = new Thread(() => Application.Run(new Login(_acessType)));
+                                    th.SetApartmentState(ApartmentState.STA);
+                                    th.Start();
+
+                                    //Fechar tela inicial de carregamento
+                                    this.Close();
+
+                                }
+                                else
+                                    ActionsGenerics.ShowMessage(result.Content.ReadAsStringAsync().Result);
+                            }
                         }
                     }
                 }
@@ -121,7 +132,7 @@ namespace RestorantiApplication.Views
 
                     messageError = messageError.Substring(0, messageError.Length - 2);
 
-                    MessageBox.Show($"O(s) campo(s) {messageError} são obrigatórios.");
+                    ActionsGenerics.ShowMessage($"O(s) campo(s) {messageError} são obrigatórios.");
                 }
             }
             catch (Exception ex)
@@ -133,7 +144,9 @@ namespace RestorantiApplication.Views
 
         private void Register_Load(object sender, EventArgs e)
         {
+            ChkProfile.Items.Clear();
             timer1.Start();
+            ChkProfile.Items.AddRange(Enum.GetNames(typeof(EProfile)));
         }
 
         private void BtnExit2_Click(object sender, EventArgs e)
