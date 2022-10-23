@@ -64,9 +64,7 @@ namespace RestorantiApplication.Views
                 if (!nullables.Any())
                 {
                     if (String.IsNullOrEmpty(TxtPassword.Text) || String.IsNullOrEmpty(TxtConfirmPassword.Text) || TxtPassword.Text != TxtConfirmPassword.Text)
-                    {
                         ActionsGenerics.ShowMessage("Senhas não coincidente.");
-                    }
                     else
                     {
                         if (ActionsGenerics.ConfirmCustom(Constants.CONFIRM_OPERATION))
