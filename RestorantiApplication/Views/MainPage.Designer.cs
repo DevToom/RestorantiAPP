@@ -36,6 +36,8 @@
             this.BtnExit = new System.Windows.Forms.Button();
             this.BtnMinimize1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.BtnAccountManager = new System.Windows.Forms.Button();
+            this.BtnTables = new System.Windows.Forms.Button();
             this.BtnProducts = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.BtnLogout = new System.Windows.Forms.Button();
@@ -44,7 +46,7 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.BtnUsers = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnDashboard = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -142,6 +144,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.panel2.Controls.Add(this.BtnAccountManager);
+            this.panel2.Controls.Add(this.BtnTables);
             this.panel2.Controls.Add(this.BtnProducts);
             this.panel2.Controls.Add(this.panel7);
             this.panel2.Controls.Add(this.panel5);
@@ -153,6 +157,46 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(204, 720);
             this.panel2.TabIndex = 0;
+            // 
+            // BtnAccountManager
+            // 
+            this.BtnAccountManager.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.BtnAccountManager.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnAccountManager.FlatAppearance.BorderSize = 0;
+            this.BtnAccountManager.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
+            this.BtnAccountManager.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAccountManager.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnAccountManager.ForeColor = System.Drawing.Color.White;
+            this.BtnAccountManager.Image = ((System.Drawing.Image)(resources.GetObject("BtnAccountManager.Image")));
+            this.BtnAccountManager.Location = new System.Drawing.Point(0, 605);
+            this.BtnAccountManager.Name = "BtnAccountManager";
+            this.BtnAccountManager.Size = new System.Drawing.Size(204, 100);
+            this.BtnAccountManager.TabIndex = 12;
+            this.BtnAccountManager.Text = "Caixa";
+            this.BtnAccountManager.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnAccountManager.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnAccountManager.UseVisualStyleBackColor = false;
+            this.BtnAccountManager.Click += new System.EventHandler(this.BtnAccountManager_Click);
+            // 
+            // BtnTables
+            // 
+            this.BtnTables.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.BtnTables.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BtnTables.FlatAppearance.BorderSize = 0;
+            this.BtnTables.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
+            this.BtnTables.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnTables.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnTables.ForeColor = System.Drawing.Color.White;
+            this.BtnTables.Image = ((System.Drawing.Image)(resources.GetObject("BtnTables.Image")));
+            this.BtnTables.Location = new System.Drawing.Point(0, 505);
+            this.BtnTables.Name = "BtnTables";
+            this.BtnTables.Size = new System.Drawing.Size(204, 100);
+            this.BtnTables.TabIndex = 11;
+            this.BtnTables.Text = "Mesas";
+            this.BtnTables.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnTables.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnTables.UseVisualStyleBackColor = false;
+            this.BtnTables.Click += new System.EventHandler(this.BtnTables_Click);
             // 
             // BtnProducts
             // 
@@ -178,9 +222,9 @@
             // 
             this.panel7.Controls.Add(this.BtnLogout);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(0, 620);
+            this.panel7.Location = new System.Drawing.Point(0, 641);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(204, 100);
+            this.panel7.Size = new System.Drawing.Size(204, 79);
             this.panel7.TabIndex = 9;
             // 
             // BtnLogout
@@ -191,7 +235,7 @@
             this.BtnLogout.Image = global::RestorantiApplication.Properties.Resources.Exit;
             this.BtnLogout.Location = new System.Drawing.Point(0, 0);
             this.BtnLogout.Name = "BtnLogout";
-            this.BtnLogout.Size = new System.Drawing.Size(204, 100);
+            this.BtnLogout.Size = new System.Drawing.Size(204, 79);
             this.BtnLogout.TabIndex = 8;
             this.BtnLogout.UseVisualStyleBackColor = true;
             this.BtnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
@@ -254,34 +298,36 @@
             this.BtnUsers.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BtnUsers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BtnUsers.UseVisualStyleBackColor = false;
+            this.BtnUsers.Click += new System.EventHandler(this.BtnUsers_Click);
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
-            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.BtnDashboard);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 105);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(204, 100);
             this.panel3.TabIndex = 1;
             // 
-            // button1
+            // BtnDashboard
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = global::RestorantiApplication.Properties.Resources.Dashboard;
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(204, 100);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Indicadores";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = true;
+            this.BtnDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnDashboard.FlatAppearance.BorderSize = 0;
+            this.BtnDashboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(22)))), ((int)(((byte)(34)))));
+            this.BtnDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDashboard.Font = new System.Drawing.Font("Aleo", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.BtnDashboard.ForeColor = System.Drawing.Color.White;
+            this.BtnDashboard.Image = global::RestorantiApplication.Properties.Resources.Dashboard;
+            this.BtnDashboard.Location = new System.Drawing.Point(0, 0);
+            this.BtnDashboard.Name = "BtnDashboard";
+            this.BtnDashboard.Size = new System.Drawing.Size(204, 100);
+            this.BtnDashboard.TabIndex = 0;
+            this.BtnDashboard.Text = "Indicadores";
+            this.BtnDashboard.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BtnDashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnDashboard.UseVisualStyleBackColor = true;
+            this.BtnDashboard.Click += new System.EventHandler(this.BtnDashboard_Click);
             // 
             // pictureBox1
             // 
@@ -330,7 +376,7 @@
         private PictureBox pictureBox1;
         private Button BtnCategorys;
         private Button BtnUsers;
-        private Button button1;
+        private Button BtnDashboard;
         private Panel panel6;
         private Button BtnMinimize1;
         private Button BtnExit;
@@ -339,5 +385,7 @@
         private Panel panel7;
         private Button BtnProducts;
         private Panel PanelRender;
+        private Button BtnTables;
+        private Button BtnAccountManager;
     }
 }

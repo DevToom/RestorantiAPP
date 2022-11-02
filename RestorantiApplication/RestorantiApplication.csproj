@@ -38,4 +38,8 @@
     <SourceGeneratorInput Remove="Models\Entities\Product.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <SourceGeneratorInput Remove="Views\Tables.cs" />
+  </ItemGroup>
+
 </Project>

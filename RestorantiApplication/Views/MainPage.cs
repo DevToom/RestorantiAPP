@@ -148,5 +148,27 @@ namespace RestorantiApplication.Views
                 Logger.Write($"Erro ao tentar deslogar da conta. Exception: {ex.Message} StackTrace: {ex.StackTrace}");
             }
         }
+
+        private void BtnUsers_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnDashboard_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnTables_Click(object sender, EventArgs e)
+        {
+            var form = new Tables { TopLevel = false };
+            this.PanelRender.Controls.Add(form);
+            form.Show();
+        }
+
+        private void BtnAccountManager_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
